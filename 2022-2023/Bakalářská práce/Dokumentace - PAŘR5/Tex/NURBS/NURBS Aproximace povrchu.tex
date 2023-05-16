@@ -1,0 +1,163 @@
+\subsection{NURBS aproximace povrchu\label{section:aproximace povrchu}}
+Stejně jako u interpolace počítáme s množinou $(r + 1)\times(s + 1)$ bodů
+$\bm{Q}_{k,l}$, $k=0,\ldots, r$ a $l = 0, \ldots, s$ ležících v mřížce, které chceme aproximovat
+pomocí vážené metody nejmenších čtverců NURBS povrchem stupně $p$ a $q$ ve
+tvaru:
+\begin{align}
+    S(\bar{u}_k, \bar{v}_l) = \sum_{i=0}^{r}\sum_{j=0}^{s}N_{i,p}(\bar{u}_k)N_{j,q}(\bar{v}_l)\bm{P}_{i,j}
+\end{align}
+Tento algoritmus interpoluje všechny rohové body a zbytek aproximuje, tj. aproximovaná plocha je tvořena body:
+\begin{align}
+    \begin{matrix}
+        \bm{Q}_{0, 0}         & \hat{\bm{Q}}_{0, 1} & \cdots & \hat{\bm{Q}}_{0, s-1}   & \bm{Q}_{0, s}         \\
+        \hat{\bm{Q}}_{1, 0}   & \ddots              &        &                         & \hat{\bm{Q}}_{1, s}   \\
+        \vdots                &                     & \ddots &                         & \vdots                \\
+        \hat{\bm{Q}}_{r-1, 0} &                     &        & \ddots                  & \hat{\bm{Q}}_{r-1, s} \\
+        \bm{Q}_{r, 0}         & \hat{\bm{Q}}_{r, 1} & \cdots & \hat{\bm{Q}}_{r-1, s-1} & \bm{Q}_{r,s}          \\
+    \end{matrix}
+\end{align}
+kde $\hat{\bm{Q}}_{i,j}$ je aproximovaný body $\bm{Q}_{i,j}$.\par
+Stejně jako u interpolace povrchu budeme nejprve aproximovat křivky
+v jednom směru a poté ve druhém. Parametry $\bar{u}_k$ a $\bar{v}_l$ a uzlové
+vektory $\bm{U}$ a $\bm{V}$ získáme stejně jako
+u interpolace povrchu~-~viz~\ref{sec:NURBS interpolace povrchu}.
+Nejprve aproximujeme body ve směru $u$, tím získáme tenzor řídících
+bodů aproximačních křivek $\bm{T}$ o rozměrech $(n + 1) \times (s + 1) \times (\dim{\bm{Q}})$:
+\begin{alignat}{3}
+    \bm{T}_{0, i}              & = \bm{Q}_{0, i}                                   & \quad i = 0, \ldots, s \\
+    \bm{T}_{n, i}              & = \bm{Q}_{r, i}                                   & \quad i = 0, \ldots, s \\
+    \bm{T}_{1 \ldots n - 1, i} & = (\bm{N}_u^T\bm{W}_u(i)\bm{N}_u)^{-1}\bm{R}_u(i) & \quad i = 0, \ldots, s
+\end{alignat}
+kde:
+\begin{itemize}
+    \item $\bm{N}_u$ je matice $(r - 1) \times (n - 1)$:
+          \begin{align}
+              \bm{N}_u = \begin{bmatrix}
+                             N_{1,p}(\bar{u}_1)        & \cdots & N_{n-1,p}(\bar{u}_1)     \\
+                             \vdots                    & \ddots & \vdots                   \\
+                             N_{1, p}(\bar{u}_{r - 1}) & \cdots & N_{n-1,p}(\bar{u}_{r-1})
+                         \end{bmatrix}
+          \end{align}
+    \item $\bm{W}_u(i)$ je matice $(r + 1)\times(s + 1)$ obsahující váhy
+          bodů $\bm{Q}_{0\ldots r, 0 \ldots,s}$:
+          \begin{align}
+              \bm{W}_u(i)
+              = \begin{bmatrix}
+                    \omega^u_0(i) & 0             & \cdots & 0               \\
+                    0             & \omega^u_1(i) & \cdots & 0               \\
+                    \vdots        & \vdots        & \ddots & \vdots          \\
+                    0             & 0             & \cdots & \omega^u_{r}(i)
+                \end{bmatrix}
+              = \diag(\bm{W}_{0\ldots r, i})
+          \end{align}
+          kde matice $\bm{W}$ obsahuje váhy jednotlivých bodů, tj.
+          $\bm{W}_{i,j}$ odpovídá váze bodu~$\bm{Q}_{i,j}$
+          (váhy rohových bodů nehrají roli).
+    \item $\bm{R}_u(i)$ je matice $(r - 1) \times(\dim\bm{Q})$:
+          \begin{equation}
+              \bm{R}_u(i) =
+              \begin{bmatrix}
+                  N_{1,p}(\bar{u}_1)\omega^u_1(i)\bm{R}^u_1(i) + \cdots + N_{1, p}(\bar{u}_{r - 1})\omega^u_{r-1}\bm{R}^u_{r - 1}(i) \\
+                  \vdots                                                                                                             \\
+                  N_{n-1,p}(\bar{u}_1)\omega^u_1\bm{R}^u_1(i) + \cdots + N_{n-1, p}(\bar{u}_{r - 1})\omega^u_{r-1}\bm{R}^u_{r- 1}(i) \\
+              \end{bmatrix}
+          \end{equation}
+          kde
+          \begin{equation}
+              \bm{R}^u_k(i)  = \bm{Q}_{k,i} - N_{0, p}(\bar{u}_k)\bm{Q}_{0,i} - N_{n,p}(\bar{u}_k)\bm{Q}_{r,i} \quad\quad k = 1, \ldots, r -1
+          \end{equation}
+\end{itemize}
+Nyní stačí vypočítat řídící body aproximovaného povrchu $\bm{P}$ o stejných rozměrech
+jako je $\bm{T}$.
+Postup je analogický ke směru $u$, kde jako nové aproximační body použijeme
+$\bm{T}$, tj.:
+% ======================================================================================
+\begin{alignat}{3}
+    \bm{P}_{i, 0}                 & = \bm{T}_{i, 0}                                   & \quad i = 0, \ldots, n \\
+    \bm{P}_{i, m}                 & = \bm{T}_{i, s}                                   & \quad i = 0, \ldots, n \\
+    \bm{P}_{i, 1 \ldots m - 1, i} & = (\bm{N}_v^T\bm{W}_v(i)\bm{N}_v)^{-1}\bm{R}_v(i) & \quad i = 0, \ldots, n
+\end{alignat}
+kde:
+\begin{itemize}
+    \item $\bm{N}_v$ je matice $(s - 1) \times (m - 1)$:
+          \begin{align}
+              \bm{N}_u =
+              \begin{bmatrix}
+                  N_{1,q}(\bar{v}_1)        & \cdots & N_{m-1,q}(\bar{v}_1)     \\
+                  \vdots                    & \ddots & \vdots                   \\
+                  N_{1, q}(\bar{v}_{s - 1}) & \cdots & N_{m-1,q}(\bar{v}_{s-1})
+              \end{bmatrix}
+          \end{align}
+    \item $\bm{W}_v(i)$ je diagonální matice $(n + 1)\times(s + 1)$ obsahující váhy
+          bodů $\bm{T}_{0\ldots n, 0\ldots s}$:
+          \begin{align}
+              \bm{W}_v(i)
+              = \begin{bmatrix}
+                    \omega^v_0(i) & 0             & \cdots & 0               \\
+                    0             & \omega^v_1(i) & \cdots & 0               \\
+                    \vdots        & \vdots        & \ddots & \vdots          \\
+                    0             & 0             & \cdots & \omega^v_{s}(i)
+                \end{bmatrix}
+              % = \imresize(W, [n + 1,])
+              = \diag(\bm{W}^V_{i, 0\ldots s})
+          \end{align}
+          kde matice $\bm{W}^V$ je přeškálovaná matice $\bm{W}$ na
+          velikost $(n+1) \times (s-1)$, stejným způsobem jako se škáluje obrázek, tj.:
+          \begin{align}
+              \bm{W}^V = \imresize(\bm{W}, [n + 1, s + 1])
+          \end{align}
+          Po provedení aproximace ve směru $u$ máme pro aproximaci ve směru $v$,
+          pouze $(n+1)\times(s+1)$ bodů (namísto původních $(r+1)\times(s+1)$),
+          proto je tato redukce nutná.
+          Důležité je, že výsledné prvky matice v sobě nějakým způsobem nesou
+          váhy pro matici původní velikosti.
+          Funkce \texttt{imresize} může produkovat záporné hodnoty,
+          ty ale stačí nahradit například výchozí hodnotou $1$.
+    \item $\bm{R}_v(i)$ je matice $(s - 1) \times(\dim\bm{Q})$:
+          \begin{equation}
+              \bm{R}_v(i) =
+              \begin{bmatrix}
+                  N_{1,q}(\bar{v}_1)\omega^v_1(i)\bm{R}^v_1(i) + \cdots + N_{1, q}(\bar{v}_{s - 1})\omega^v_{s-1}\bm{R}^v_{s - 1}(i) \\
+                  \vdots                                                                                                             \\
+                  N_{m-1,q}(\bar{v}_1)\omega^v_1\bm{R}^v_1(i) + \cdots + N_{m-1, q}(\bar{v}_{s - 1})\omega^v_{s-1}\bm{R}^v_{s- 1}(i) \\
+              \end{bmatrix}
+          \end{equation}
+          kde
+          \begin{equation}
+              \bm{R}^v_l(i)  = \bm{T}_{i,l} - N_{0, q}(\bar{v}_l)\bm{T}_{i,0} - N_{m,q}(\bar{v}_l)\bm{T}_{i, s} \quad\quad l = 1, \ldots, s -1
+          \end{equation}
+\end{itemize}
+Ukázka různých aproximací jsou na obrázcích č. \ref{fig:Demo aproximace povrchu č. 1},
+\ref{fig:Demo aproximace povrchu č. 2},
+\ref{fig:Demo aproximace povrchu pro různé váhy č. 1} a
+\ref{fig:Demo aproximace povrchu pro různé váhy č. 2}.
+
+\begin{imagepage}
+    \begin{figure}[H]
+        \centering
+        \includegraphics[width=0.95\textwidth]{Generated/Demo aproximace povrchu 1.pdf}
+        \caption{Aproximace povrchu metodou nejmenších čtverců č. 1}
+        \label{fig:Demo aproximace povrchu č. 1}
+    \end{figure}
+    \begin{figure}[H]
+        \centering
+        \includegraphics[width=0.95\textwidth]{Generated/Demo aproximace povrchu 2.pdf}
+        \caption{Aproximace povrchu metodou nejmenších čtverců č. 2}
+        \label{fig:Demo aproximace povrchu č. 2}
+    \end{figure}
+\end{imagepage}
+
+\begin{imagepage}
+    \begin{figure}[H]
+        \centering
+        \includegraphics[width=0.95\textwidth]{Generated/Ukázka aproximace povrchu pro různé váhy bodů 2.pdf}
+        \caption{Aproximace povrchu pro různé váhy č. 1}
+        \label{fig:Demo aproximace povrchu pro různé váhy č. 1}
+    \end{figure}
+    \begin{figure}[H]
+        \centering
+        \includegraphics[width=0.95\textwidth]{Generated/Ukázka aproximace povrchu pro různé váhy bodů 3.pdf}
+        \caption{Aproximace povrchu pro různé váhy č. 2}
+        \label{fig:Demo aproximace povrchu pro různé váhy č. 2}
+    \end{figure}
+\end{imagepage}

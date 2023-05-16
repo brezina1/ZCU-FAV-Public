@@ -1,0 +1,199 @@
+\subsection{Interpolace 4D křivky}
+Interpolací 4D křivky je v tomto případě myšlena křivka tvořena 3D body ($x, y,
+    z$), které se mění v závislosti na 4. souřadnici $w$. Tudíž nechceme
+interpolovat jednu dlouhou 4D křivku (jak jsme dosud dělali v předchozích
+případech), ale vlastně několik 3D křivek mezi sebou za využití 4.
+souřadnice.\par Tohoto docílíme interpolací samotných bodů příslušných křivek
+přes souřadnici $w$, kterou lze vidět na obrázcích č. \ref{fig:Demo 4D
+    Interpolace mezi body přes souřadnici w 1}, \ref{fig:Demo 4D Interpolace mezi
+    body přes souřadnici w 2}, \ref{fig:Demo 4D Interpolace mezi body přes
+    souřadnici w 3}. Dále obrázky č. \ref{fig:Demo 4D Interpolace mezi body přes
+    souřadnici w shora 1}, \ref{fig:Demo 4D Interpolace mezi body přes souřadnici w
+    shora 2} a \ref{fig:Demo 4D Interpolace mezi body přes souřadnici w shora 3}
+značí pohled na přechodové křivky shora, a obrázky č. \ref{fig:Demo 4D
+    Interpolace mezi body přes souřadnici w konst x 1}, \ref{fig:Demo 4D
+    Interpolace mezi body přes souřadnici w konst x 2} a \ref{fig:Demo 4D
+    Interpolace mezi body přes souřadnici w konst x 3} ukazují interpolaci mezi
+jedním bodem z každé křivky.
+
+\subsubsection{4D Křivka číslo 1}
+Tuto 4D křivku tvoří tři 3D křivky popsané body:
+\begin{alignat}{3}
+    \bm{Q}_1 & = [\bm{x}, \bm{y}, \bm{z}, \bm{w}] & = & [\bm{x}, \sin(\bm{x}), 10, 0]   \\
+    \bm{Q}_2 & = [\bm{x}, \bm{y}, \bm{z}, \bm{w}] & = & [\bm{x}, -\sin(\bm{x}), 0, 100] \\
+    \bm{Q}_3 & = [\bm{x}, \bm{y}, \bm{z}, \bm{w}] & = & [\bm{x}, \sin(\bm{x}), 20, 200]
+\end{alignat}
+kde
+\begin{equation}
+    \bm{x} = linspace(0, 2\cdot\pi, 25)
+\end{equation}
+Tyto fáze naší 4D křivky jsou rovnoměrně rozmístěny ve 4. dimenzi, tj.
+$\bm{w}$ = $0, 100, 200$ při křivky 1, 2 a 3 respektive. Tímto by přechod mezi křivkami měl
+být \todo{rovnoměrný? plynulý? symetrický?}. Ukázka přechodu mezi těmito křivkami je
+zobrazena na animaci č. \ref{fig:Demo 4D Interpolace mezi křivkami č. 1}.
+\subsubsection{4D Křivka číslo 2}
+Tuto 4D křivku tvoří tři 3D křivky popsané body:
+\begin{alignat}{3}
+    \bm{Q}_1 & = [\bm{x}, \bm{y}, \bm{z}, \bm{w}] & = & [\bm{x}, \sin(\bm{x}), 10, 0]                            \\
+    \bm{Q}_2 & = [\bm{x}, \bm{y}, \bm{z}, \bm{w}] & = & [\bm{x}, -\sin(\bm{x}), 0, \text{\textcolor{red}{$50$}}] \\
+    \bm{Q}_3 & = [\bm{x}, \bm{y}, \bm{z}, \bm{w}] & = & [\bm{x}, \sin(\bm{x}), 20, 200]
+\end{alignat}
+kde
+\begin{equation}
+    \bm{x} = linspace(0, 2\cdot\pi, 25)
+\end{equation}
+V tomto případě interpolační křivky již nejsou rozmístěny rovnoměrně ve 4. dimenzi,
+což v našem případě znamená, že přechod od křivky tvořenou body $\bm{Q}_1$ do křivky
+tvořenou $\bm{Q}_2$ je $4\times$ kratší, než přechod od $\bm{Q}_2$ do $\bm{Q}_3$. Toto
+je naznačené na obrázcích č.~\ref{fig:Demo 4D Interpolace mezi body přes souřadnici w 2},
+\ref{fig:Demo 4D Interpolace mezi body přes souřadnici w shora 2} a
+\ref{fig:Demo 4D Interpolace mezi body přes souřadnici w konst x 2},
+kde je nepoměr vidět (přestože je zkreslený).
+Pořádně lze tento jev vidět až na animaci č. \ref{fig:Demo 4D Interpolace mezi křivkami č. 2},
+kde je také celý průběh interpolace.
+
+\subsubsection{4D Křivka číslo 3}
+Tuto 4D křivku tvoří tři 3D křivky popsané body:
+\begin{alignat}{3}
+    \bm{Q}_1 & = [\bm{x}, \bm{y}, \bm{z}, \bm{w}] & = & [\bm{x}, \sin(\bm{x}), 10, 0]                        \\
+    \bm{Q}_2 & = [\bm{x}, \bm{y}, \bm{z}, \bm{w}] & = & [\bm{x}, -\sin(\bm{x}), 2.5 + 2.5\cos(2\bm{x}), 100] \\
+    \bm{Q}_3 & = [\bm{x}, \bm{y}, \bm{z}, \bm{w}] & = & [\bm{x}, \sin(\bm{x}), 17.5 - 2.5\cos(2\bm{x}), 200]
+\end{alignat}
+kde
+\begin{equation}
+    \bm{x} = linspace(0, 2\cdot\pi, 25)
+\end{equation}
+Zde se pro ukázku interpolované křivky mění i v ose $z$ v závislosti na $x$.
+Obrázky k této interpolaci jsou \ref{fig:Demo 4D Interpolace mezi body přes souřadnici w 3},
+\ref{fig:Demo 4D Interpolace mezi body přes souřadnici w shora 3},
+\ref{fig:Demo 4D Interpolace mezi body přes souřadnici w konst x 3} a
+\ref{fig:Demo 4D Interpolace mezi křivkami č. 3}.
+
+\begin{imagepage}
+    \begin{figure}[H]
+        \centering
+        \includegraphics[height=0.4\textheight]{Generated/Interpolace 4D křivky - Interpolace mezi body ve 4. dimenzi č. 1.pdf}
+        \caption{Interpolace bodů křivek přes souřadnici $w$ č. 1}
+        \label{fig:Demo 4D Interpolace mezi body přes souřadnici w 1}
+    \end{figure}
+    \begin{figure}[H]
+        \centering
+        \includegraphics[height=0.4\textheight]{Generated/Interpolace 4D křivky - Interpolace mezi body ve 4. dimenzi (shora) č. 1.pdf}
+        \caption{Interpolace bodů křivek přes souřadnici $w$ (pohled shora) č. 1}
+        \label{fig:Demo 4D Interpolace mezi body přes souřadnici w shora 1}
+    \end{figure}
+\end{imagepage}
+
+\begin{imagepage}
+    \begin{figure}[H]
+        \centering
+        \includegraphics[height=0.4\textheight]{Generated/Interpolace 4D křivky - Interpolace mezi body ve 4. dimenzi 1 vlákno č. 1.pdf}
+        \caption{Ukázka interpolace pro 1 bod z každé křivky č. 1}
+        \label{fig:Demo 4D Interpolace mezi body přes souřadnici w konst x 1}
+    \end{figure}
+    \ifthenelse{\boolean{includeAnimations}}{
+        \begin{figure}[H]
+            \centering
+            \includeanimation{Generated/4D curve demo 1/frame-}{12.5}{palindrome, height=0.4\textheight}
+            \caption{Ukázka průběhu interpolace mezi křivkami přes souřadnici $w$ č. 1}
+            \label{fig:Demo 4D Interpolace mezi křivkami č. 1}
+        \end{figure}
+    }{}
+\end{imagepage}
+\ifthenelse{\boolean{includeAnimationFrames}}{
+    \begin{landscapeimagepage}
+        \vspace*{\fill}
+        \begin{figure}[H]
+            \centering
+            \includeanimationframes[\vspace{1cm}]{Generated/4D curve demo 1/frame-}{width=0.28\pdfpageheight}
+            \caption{Ukázka průběhu interpolace mezi křivkami přes souřadnici $w$ č. 1}
+            \label{fig:Demo 4D Interpolace mezi křivkami č. 1}
+        \end{figure}
+        \vspace*{\fill}
+    \end{landscapeimagepage}}{}
+% ======================================
+\begin{imagepage}
+    \begin{figure}[H]
+        \centering
+        \includegraphics[height=0.4\textheight]{Generated/Interpolace 4D křivky - Interpolace mezi body ve 4. dimenzi č. 2.pdf}
+        \caption{Interpolace bodů křivek přes souřadnici $w$ č. 2}
+        \label{fig:Demo 4D Interpolace mezi body přes souřadnici w 2}
+    \end{figure}
+    \begin{figure}[H]
+        \centering
+        \includegraphics[height=0.4\textheight]{Generated/Interpolace 4D křivky - Interpolace mezi body ve 4. dimenzi (shora) č. 2.pdf}
+        \caption{Interpolace bodů křivek přes souřadnici $w$ (pohled shora) č. 2}
+        \label{fig:Demo 4D Interpolace mezi body přes souřadnici w shora 2}
+    \end{figure}
+\end{imagepage}
+
+\begin{imagepage}
+    \begin{figure}[H]
+        \centering
+        \includegraphics[height=0.4\textheight]{Generated/Interpolace 4D křivky - Interpolace mezi body ve 4. dimenzi 1 vlákno č. 2.pdf}
+        \caption{Ukázka interpolace pro 1 bod z každé křivky č. 2}
+        \label{fig:Demo 4D Interpolace mezi body přes souřadnici w konst x 2}
+    \end{figure}
+    \ifthenelse{\boolean{includeAnimations}}{
+        \begin{figure}[H]
+            \centering
+            \ifthenelse{\boolean{includeAnimations}}{\includeanimation{Generated/4D curve demo 2/frame-}{12.5}{palindrome, height=0.4\textheight}}{}
+            \caption{Ukázka průběhu interpolace mezi křivkami přes souřadnici $w$ č. 2}
+            \label{fig:Demo 4D Interpolace mezi křivkami č. 2}
+        \end{figure}
+    }{}
+\end{imagepage}
+\ifthenelse{\boolean{includeAnimationFrames}}{
+    \begin{landscapeimagepage}
+        \vspace*{\fill}
+        \begin{figure}[H]
+            \centering
+            \includeanimationframes[\vspace{1cm}]{Generated/4D curve demo 2/frame-}{width=0.28\pdfpageheight}
+            \caption{Ukázka průběhu interpolace mezi křivkami přes souřadnici $w$ č. 2}
+            \label{fig:Demo 4D Interpolace mezi křivkami č. 2}
+        \end{figure}
+        \vspace*{\fill}
+    \end{landscapeimagepage}}{}
+% =====================================
+\begin{imagepage}
+    \begin{figure}[H]
+        \centering
+        \includegraphics[height=0.4\textheight]{Generated/Interpolace 4D křivky - Interpolace mezi body ve 4. dimenzi č. 3.pdf}
+        \caption{Interpolace bodů křivek přes souřadnici $w$ č. 3 \todo{možná jinej pohled}}
+        \label{fig:Demo 4D Interpolace mezi body přes souřadnici w 3}
+    \end{figure}
+    \begin{figure}[H]
+        \centering
+        \includegraphics[height=0.4\textheight]{Generated/Interpolace 4D křivky - Interpolace mezi body ve 4. dimenzi (shora) č. 3.pdf}
+        \caption{Interpolace bodů křivek přes souřadnici $w$ (pohled shora) č. 3}
+        \label{fig:Demo 4D Interpolace mezi body přes souřadnici w shora 3}
+    \end{figure}
+\end{imagepage}
+
+\begin{imagepage}
+    \begin{figure}[H]
+        \centering
+        \includegraphics[height=0.4\textheight]{Generated/Interpolace 4D křivky - Interpolace mezi body ve 4. dimenzi 1 vlákno č. 3.pdf}
+        \caption{Ukázka interpolace pro 1 bod z každé křivky č. 3}
+        \label{fig:Demo 4D Interpolace mezi body přes souřadnici w konst x 3}
+    \end{figure}
+    \ifthenelse{\boolean{includeAnimations}}{
+        \begin{figure}[H]
+            \centering
+            \ifthenelse{\boolean{includeAnimations}}{\includeanimation{Generated/4D curve demo 3/frame-}{12.5}{palindrome, height=0.4\textheight}}{}
+            \caption{Ukázka průběhu interpolace mezi křivkami přes souřadnici $w$ č. 3 \todo{možná jinej pohled}}
+            \label{fig:Demo 4D Interpolace mezi křivkami č. 3}
+        \end{figure}
+    }{}
+\end{imagepage}
+\ifthenelse{\boolean{includeAnimationFrames}}{
+    \begin{landscapeimagepage}
+        \vspace*{\fill}
+        \begin{figure}[H]
+            \centering
+            \includeanimationframes[\vspace{1cm}]{Generated/4D curve demo 3/frame-}{width=0.28\pdfpageheight}
+            \caption{Ukázka průběhu interpolace mezi křivkami přes souřadnici $w$ č. 3}
+            \label{fig:Demo 4D Interpolace mezi křivkami č. 3}
+        \end{figure}
+        \vspace*{\fill}
+    \end{landscapeimagepage}}{}

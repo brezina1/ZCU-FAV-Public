@@ -1,0 +1,74 @@
+\PassOptionsToPackage{pdftex,
+                        pdfauthor={Pavel Březina},
+                        pdftitle={BP - Březina},
+                        pdfsubject={Adaptivní přímovazební kompenzace statických sil působících na mechatronický systém}
+                        }{hyperref}  
+\documentclass[12pt, czech, twoside]{article}
+\raggedbottom
+\usepackage[czech]{babel}
+
+\input{../../../Common/Tex/Packages.tex}
+\input{../../../Common/Tex/Declarations.tex}
+
+\usetikzlibrary{shapes,arrows,positioning,calc}
+
+\newboolean{includeAnimations}
+\setboolean{includeAnimations}{false}
+
+\newboolean{includeAnimationFrames}
+\setboolean{includeAnimationFrames}{true}
+
+\setcounter{tocdepth}{3}    % how many sectioning levels to show in ToC
+
+
+% \def\imagepageinnermargin{1cm}
+% \def\imagepageoutermargin{1cm}
+
+% pro tisk
+\def\imagepageinnermargin{2cm}
+\def\imagepageoutermargin{0.5cm}
+
+
+% \newcommand{\getmode}{dark-mode}
+
+% \ifthenelse{\equal{\getmode}{dark-mode}}
+%     {% true
+%       \pagecolor[rgb]{0,0,0}
+%       \color[rgb]{0.95,0.95,0.95}
+%     }
+\addbibresource{Reference.bib}
+
+\begin{document}
+\pagenumbering{gobble}
+\input{Tex/TitlePage.tex}
+% \null\newpage
+\input{Tex/ÚvodníVěci.tex}
+\input{Tex/ContentsPage.tex}
+\pagenumbering{arabic}
+\input{Tex/Úvod.tex}
+\input{Tex/Řízený a řídící systém/Popis řízeného systému.tex}
+\input{Tex/Řízený a řídící systém/Zjednodušený model systému.tex}
+\input{Tex/Řízený a řídící systém/Struktura řídícího systému.tex}
+\input{Tex/Řízený a řídící systém/Návrh řešení automatické kalibrace.tex}
+% \input{Tex/Linearizace.tex}
+\input{Tex/NURBS/NURBS.tex}
+\input{Tex/NURBS/NURBS křivky.tex}
+\input{Tex/NURBS/NURBS povrchy.tex}
+\input{Tex/NURBS/NURBS Interpolace křivky.tex}
+% \input{Tex/NURBS/NURBS Interpolace 4D křivky.tex}
+\input{Tex/NURBS/NURBS Interpolace povrchu.tex}
+\input{Tex/NURBS/NURBS Interpolace 4D povrchu.tex}
+\input{Tex/NURBS/NURBS Aproximace křivky.tex}
+\input{Tex/NURBS/NURBS Cílená aproximace křivky.tex}
+\input{Tex/NURBS/NURBS Aproximace povrchu.tex}
+\input{Tex/NURBS/NURBS Aproximace povrchu Gauss.tex}
+\input{Tex/NURBS/NURBS Aproximace 4D povrchu Gauss.tex}
+\input{Tex/Návrh systému automatické kalibrace CCT/Aplikace NURBS.tex}
+\input{Tex/Návrh systému automatické kalibrace CCT/Analýza zaznamenaného pohybu jedné osy.tex}
+\input{Tex/Návrh systému automatické kalibrace CCT/Analýza testu odchylky proudu.tex}
+\input{Tex/Návrh systému automatické kalibrace CCT/Aktualizace CCT.tex}
+\input{Tex/Závěr.tex}
+\pagebreak
+\section*{Zdroje}
+\printbibliography[heading=none]
+\end{document}

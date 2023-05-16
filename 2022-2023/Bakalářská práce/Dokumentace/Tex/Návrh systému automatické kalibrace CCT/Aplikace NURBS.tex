@@ -1,0 +1,193 @@
+\section{Návrh systému automatické kalibrace proudové tabulky}\label{section: návrh automatické kalibraci}
+Tato kapitola se již zabývá aplikací NURBS teorie na náš problém --- tj. užití NURBS teorie pro práci s kalibrační tabulkou. Dále se kapitola zaměřuje na sběr vhodných hodnot pro aktualizace kalibrační tabulky.
+\subsection{Aplikace NURBS teorie pro modelování kalibrační tabulky}
+V této kapitole je již použita NURBS interpolace a aproximace na konkrétních datech. Nejprve je uvedena ukázka na 1 DoF modelu, poté na řezu kalibrační tabulkou, kde lze vidět cílenou aproximaci, dále je uvedena 3D a 4D interpolace kompenzačních tabulek.
+\subsubsection{1 DoF model}
+Na obrázku č.~\ref{fig:Cílená aproximace křivky 1 DoF} je ukázka cílené aproximace křivky pro náš 1 DoF model systému. Aproximační body jsme získali úpravou fyzikálních parametrů modelu, zvolené body jsou záměrně mimo ``mřížku'' od původních bodů. Ukázka obsahuje výsledky pro dvě různé váhy aproximačních bodů.
+\subsubsection{2D řez kalibrační tabulkou}
+Na obrázcích č.~\ref{fig:Cílená aproximace křivky}, \ref{fig:Cílená aproximace křivky přiblíženo} je ukázka
+cílené aproximace křivky na jedné z kalibračních tabulek pro fixní hodnotu osy $Prop$, kde je lépe ukázáno jak cílená aproximace funguje v detailu. Řez tabulkou jsme získali právě zvolením fixní hodnoty kloubu $Prop$.
+\subsubsection{Interpolace kalibračních tabulek}
+Na obrázcích č.~\ref{fig: Ukázka interpolace na reálných datech č. 1}, \ref{fig: Ukázka interpolace na reálných datech č. 2}, \ref{fig: Ukázka interpolace na reálných datech č. 3}, \ref{fig: Ukázka interpolace na reálných datech č. 4}, napravo lze vidět aplikaci NURBS interpolace povrchu a nalevo lze vidět původní data.
+\todo{Řád povrchu?}
+\subsubsection{Interpolace napříč kalibračními tabulkami}
+Jak již bylo zmíněno, máme 2 kalibrační tabulky pro dvě polohy kloubu $Ids$, a proto bychom rádi chtěli přes tuto souřadnici interpolovat, abychom získali kalibrační tabulky mezi těmito dvěma polohami. K tomuto využijeme NURBS interpolaci nadpovrchu ze sekce \nameref{section:interpolace 4D povrchu}, výsledné animace jsou na obrázcích č.~\ref{fig:Demo 4D Interpolace mezi povrchy - reálná data dopředný pohyb},
+\ref{fig:Demo 4D Interpolace mezi povrchy - reálná data zpětný pohyb}.
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.75\textwidth]{Generated/Ukázka cílené aproximace na 1DoF modelu.pdf}
+    \caption{Cílená aproximace křivky metodou nejmenších čtverců na 1 DoF modelu
+        pro různé váhy nových bodů}
+    \label{fig:Cílená aproximace křivky 1 DoF}
+\end{figure}
+\begin{imagepage}
+    \begin{figure}[H]
+        \centering
+        \includegraphics[width=0.85\textwidth]{Generated/Ukázka cílené aproximace na reálných datech.pdf}
+        \caption{Cílená aproximace křivky metodou nejmenších čtverců na reálných datech}
+        \label{fig:Cílená aproximace křivky}
+    \end{figure}
+    \begin{figure}[H]
+        \centering
+        \includegraphics[width=0.85\textwidth]{Generated/Ukázka cílené aproximace na reálných datech přiblíženo.pdf}
+        \caption{Cílená aproximace křivky metodou nejmenších čtverců na reálných datech (přiblíženo)}
+        \label{fig:Cílená aproximace křivky přiblíženo}
+    \end{figure}
+\end{imagepage}
+
+\begin{landscapeimagepage}
+    % \vspace*{\fill}
+    \begin{figure}[H]
+        \centering
+        \begin{subfigure}{.5\textheight}
+            \centering
+            \includegraphics[width=\textwidth]{Generated/Plot kompenzace proudu - reálná data 1.pdf}
+            \caption{Lineární interpolace kompenzační tabulky proudu č. 1}
+            \label{fig:Lineární interpolace kompenzační tabulky proudu č. 1}
+        \end{subfigure}
+        \hspace{2.5cm}
+        \begin{subfigure}{.5\textheight}
+            \centering
+            \includegraphics[width=\textwidth]{Generated/Plot kompenzace proudu - reálná data - interpolace1.pdf}
+            \caption{NURBS interpolace kompenzační tabulky proudu č. 1}
+            \label{fig:NURBS interpolace kompenzační tabulky proudu č. 1}
+        \end{subfigure}
+        \caption{Ukázka interpolace na reálných datech č. 1}
+        \label{fig: Ukázka interpolace na reálných datech č. 1}
+    \end{figure}
+    \begin{figure}[H]
+        \centering
+        \begin{subfigure}{.5\textheight}
+            \centering
+            \includegraphics[width=\textwidth]{Generated/Plot kompenzace proudu - reálná data 2.pdf}
+            \caption{Lineární interpolace kompenzační tabulky proudu č. 2}
+            \label{fig:Lineární interpolace kompenzační tabulky proudu č. 2}
+        \end{subfigure}
+        \hspace{2.5cm}
+        \begin{subfigure}{.5\textheight}
+            \centering
+            \includegraphics[width=\textwidth]{Generated/Plot kompenzace proudu - reálná data - interpolace2.pdf}
+            \caption{NURBS interpolace kompenzační tabulky proudu č. 2}
+            \label{fig:NURBS interpolace kompenzační tabulky proudu č. 2}
+        \end{subfigure}
+        \caption{Ukázka interpolace na reálných datech č. 2}
+        \label{fig: Ukázka interpolace na reálných datech č. 2}
+    \end{figure}
+    % \vspace*{\fill}
+\end{landscapeimagepage}
+
+\begin{landscapeimagepage}
+    % \vspace*{\fill}
+    \begin{figure}[H]
+        \centering
+        \begin{subfigure}{.5\textheight}
+            \centering
+            \includegraphics[width=\textwidth]{Generated/Plot kompenzace proudu - reálná data 3.pdf}
+            \caption{Lineární interpolace kompenzační tabulky proudu č. 3}
+            \label{fig:Lineární interpolace kompenzační tabulky proudu č. 3}
+        \end{subfigure}
+        \hspace{2.5cm}
+        \begin{subfigure}{.5\textheight}
+            \centering
+            \includegraphics[width=\textwidth]{Generated/Plot kompenzace proudu - reálná data - interpolace3.pdf}
+            \caption{NURBS interpolace kompenzační tabulky proudu č. 3}
+            \label{fig:NURBS interpolace kompenzační tabulky proudu č. 3}
+        \end{subfigure}
+        \caption{Ukázka interpolace na reálných datech č. 3}
+        \label{fig: Ukázka interpolace na reálných datech č. 3}
+    \end{figure}
+    \begin{figure}[H]
+        \centering
+        \begin{subfigure}{.5\textheight}
+            \centering
+            \includegraphics[width=\textwidth]{Generated/Plot kompenzace proudu - reálná data 4.pdf}
+            \caption{Lineární interpolace kompenzační tabulky proudu č. 4}
+            \label{fig:Lineární interpolace kompenzační tabulky proudu č. 4}
+        \end{subfigure}
+        \hspace{2.5cm}
+        \begin{subfigure}{.5\textheight}
+            \centering
+            \includegraphics[width=\textwidth]{Generated/Plot kompenzace proudu - reálná data - interpolace4.pdf}
+            \caption{NURBS interpolace kompenzační tabulky proudu č. 4}
+            \label{fig:NURBS interpolace kompenzační tabulky proudu č. 4}
+        \end{subfigure}
+        \caption{Ukázka interpolace na reálných datech č. 4}
+        \label{fig: Ukázka interpolace na reálných datech č. 4}
+    \end{figure}
+    % \vspace*{\fill}
+\end{landscapeimagepage}
+\ifthenelse{\boolean{includeAnimations}}{
+    \begin{landscapeimagepage}
+        % \vspace*{\fill}
+        \begin{figure}[H]
+            \centering
+            \includegraphics[width=0.45\pdfpagewidth]{Generated/Interpolace 4d povrchu část 1 č. 2.pdf}\hspace{0.5cm}
+            \includegraphics[width=0.45\pdfpagewidth]{Generated/Interpolace 4d povrchu část 2 č. 2.pdf}
+            \caption{Interpolační povrchy pro 4D interpolaci kompenzačních tabulek - dopředný pohyb}
+        \end{figure}
+        \begin{figure}[H]
+            \centering
+            \includeanimation{Generated/4D surface demo 2/frame-}{12.5}{palindrome, height=0.4\textheight}
+            % \includeanimation{Generated/4D surface demo 1/frame-}{12.5}{palindrome, height=0.4\textheight}
+            \caption{Ukázka průběhu interpolace mezi kompenzačními tabulkami přes souřadnici $Ids$ --- dopředný pohyb}
+            \label{fig:Demo 4D Interpolace mezi povrchy - reálná data dopředný pohyb}
+        \end{figure}
+        % \vspace*{\fill}
+    \end{landscapeimagepage}}{}
+\ifthenelse{\boolean{includeAnimationFrames}}{
+    \begin{landscapeimagepage}
+        % \vspace*{\fill}
+        \begin{figure}[H]
+            \centering
+            \includegraphics[width=0.33\pdfpagewidth]{Generated/Interpolace 4d povrchu část 1 č. 2.pdf}\hspace{0.5cm}
+            \includegraphics[width=0.33\pdfpagewidth]{Generated/Interpolace 4d povrchu část 2 č. 2.pdf}
+            \caption{Interpolační povrchy pro 4D interpolaci kompenzačních tabulek - dopředný pohyb}
+        \end{figure}
+        \begin{figure}[H]
+            \centering
+            \includeanimationframes{Generated/4D surface demo 2/frame-}{height=0.25\pdfpagewidth}
+            % \includeanimation{Generated/4D surface demo 1/frame-}{12.5}{palindrome, height=0.4\textheight}
+            \caption{Ukázka průběhu interpolace mezi kompenzačními tabulkami přes souřadnici $Ids$ --- dopředný pohyb}
+            \label{fig:Demo 4D Interpolace mezi povrchy - reálná data dopředný pohyb}
+        \end{figure}
+        % \vspace*{\fill}
+    \end{landscapeimagepage}}{}
+
+\ifthenelse{\boolean{includeAnimations}}{
+    \begin{landscapeimagepage}
+        % \vspace*{\fill}
+        \begin{figure}[H]
+            \centering
+            \includegraphics[width=0.45\pdfpagewidth]{Generated/Interpolace 4d povrchu část 2 č. 3.pdf}\hspace{0.5cm}
+            \includegraphics[width=0.45\pdfpagewidth]{Generated/Interpolace 4d povrchu část 1 č. 3.pdf}
+            \caption{Interpolační povrchy pro 4D interpolaci kompenzačních tabulek - zpětný pohyb}
+        \end{figure}
+        \vfill
+        \begin{figure}[H]
+            \centering
+            \includeanimation{Generated/4D surface demo 3/frame-}{12.5}{palindrome, height=0.4\textheight}
+            % \includeanimation{Generated/4D surface demo 1/frame-}{12.5}{palindrome, height=0.5\textheight}
+            \caption{Ukázka průběhu interpolace mezi kompenzačními tabulkami přes souřadnici $Ids$ --- zpětný pohyb}
+            \label{fig:Demo 4D Interpolace mezi povrchy - reálná data zpětný pohyb}
+        \end{figure}
+        % \vspace*{\fill}
+    \end{landscapeimagepage}}{}
+\ifthenelse{\boolean{includeAnimationFrames}}{
+    \begin{landscapeimagepage}
+        % \vspace*{\fill}
+        \begin{figure}[H]
+            \centering
+            \includegraphics[width=0.33\pdfpagewidth]{Generated/Interpolace 4d povrchu část 2 č. 3.pdf}\hspace{0.5cm}
+            \includegraphics[width=0.33\pdfpagewidth]{Generated/Interpolace 4d povrchu část 1 č. 3.pdf}
+            \caption{Interpolační povrchy pro 4D interpolaci kompenzačních tabulek - zpětný pohyb}
+        \end{figure}
+        \vfill
+        \begin{figure}[H]
+            \centering
+            \includeanimationframes{Generated/4D surface demo 3/frame-}{height=0.25\pdfpagewidth}
+            % \includeanimation{Generated/4D surface demo 1/frame-}{12.5}{palindrome, height=0.5\textheight}
+            \caption{Ukázka průběhu interpolace mezi kompenzačními tabulkami přes souřadnici $Ids$ --- zpětný pohyb}
+            \label{fig:Demo 4D Interpolace mezi povrchy - reálná data zpětný pohyb}
+        \end{figure}
+        % \vspace*{\fill}
+    \end{landscapeimagepage}}{}

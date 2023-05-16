@@ -1,0 +1,18 @@
+\subsection{Návrh řešení autonomní rekalibrace proudové tabulky}
+Při běžné operaci robota můžeme sledovat polohy a rychlosti jednotlivých kloubů pro které se pohyb vyhlazuje pomocí proudové kalibrační tabulky. Sběrem vhodných bodů pro aktualizaci CCT se zabývá sekce \nameref{section:Analýza záznamu jednoho kloubu}.
+\par
+Kompenzační proud pohonu pro jeden směr pohybu je momentálně popsán dvěma kalibračními tabulkami (2 polohy kloubu $Ids$), kde každá tabulka popisuje 3D povrch. Nový způsob ukládání těchto závislostí je pomocí 4D NURBS nadpovrchu, což je čtyřrozměrný prostor, který již obsahuje kompletní informaci o kompenzačním proudu pro libovolné polohy všech tří kloubů $C_{Arc}, Prop, Ids$ v rámci jejich stanoveného rozsahu.
+\par
+Uvažujme tedy kompenzační tabulku popsanou 4D nadpovrchem. Vhodně konstruovaný algoritmus aktivně sleduje pohyby manipulátoru a vyhovující hodnoty kompenzačního proudu uloží pro účely aktualizace CCT. Na základě uložených hodnot můžeme poupravit 4D nadpovrch tak, aby na těchto místech byl kompenzační proud popsán přesněji.
+\par
+Kroky výsledného algoritmu robota pro jednu relaci by mohly vypadat nějak takto:
+\begin{enumerate}
+    \item Načtení a vytvoření kalibrační tabulky ve formě NURBS 4D nadpovrchu --- tj. provedení NURBS interpolace \todo{rozvést proč interpolace}
+    \item \label{item:průběh práce} V průběhu práce s robotem se za běhu
+          \begin{enumerate}
+              \item z nadpovrchu vypočítá kompenzační proud na základě aktuálních poloh kloubů $C_{Arc}, Prop, Ids$.
+              \item nasbírají vhodné body pro budoucí aktualizaci kompenzační tabulky.
+          \end{enumerate}
+    \item \label{item:konec relace} Na konci relace na základě nasbíraných bodů proběhne přepočtení a následné uložení kompenzační tabulky  --- tj. provedení NURBS aproximace \todo{rozvést proč aproximace viz článek}
+\end{enumerate}
+V této práci postupně projdeme všechny tyto zmíněné kroky.

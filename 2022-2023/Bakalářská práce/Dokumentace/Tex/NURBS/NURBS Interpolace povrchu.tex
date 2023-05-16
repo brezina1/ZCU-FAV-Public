@@ -1,0 +1,51 @@
+\subsection[NURBS interpolace povrchu]{NURBS interpolace povrchu\footcite[kapitola 9.2.5]{The_NURBS_Book}}\label{sec:NURBS interpolace povrchu}
+Interpolace povrchu je podobná interpolaci 3D křivky --- máme množinu $(n + 1)
+    \times (m + 1)$ bodů $\{\bm{Q}_{k,l}\}$, $k=0,\ldots,n$ a $l=0,\ldots,m$ ležících na mřížce, které
+chceme interpolovat NURBS povrchem stupně $p$ a $q$, tzn.:
+\begin{equation}
+    \bm{Q}_{k,l} = \bm{S}(\bar{u}_k, \bar{v}_l) = \sum_{i=0}^{n}\sum_{j=0}^{m}
+    N_{i,p}(\bar{u}_k)N_{j,q}(\bar{v}_l)\bm{P}_{i,j}
+\end{equation}
+Stejně jako u interpolace křivky musíme vhodně zvolit parametry $\bar{u}_k$ a $\bar{v}_k$
+a uzlové vektory $\bm{U}$ a $\bm{V}$.
+Užitím běžných metod~(\ref{eq:chord length}) a ($\ref{eq:centripetal method}$) získáme
+vektory $\hat{\bar{u}}_k$ a $\hat{\bar{v}}_k$, které musíme poté
+zprůměrovat přes všechny hodnoty, tzn:
+\begin{alignat}{3}
+    \bar{u}_k & = \frac{1}{m + 1}\sum_{j=0}^{m}\hat{\bar{u}}_j \quad\quad & k =0,\ldots,n \\
+    \bar{v}_l & = \frac{1}{n + 1}\sum_{j=0}^{n}\hat{\bar{v}}_j\quad\quad  & l =0,\ldots,m
+\end{alignat}
+Uzlové vektory $\bm{U}$ a $\bm{V}$ spočteme již stejně jako u interpolace křivky,
+viz~\ref{eq:uzlový vektor průměrováním}.\par
+Oproti křivce, v tomto případě $\bm{P}_{i,j}$ již není matice, ale tenzor. Tento problém můžeme
+zjednodušit na interpolaci křivek postupně v obou směrech
+zafixováním jedné z proměnných $k$ nebo $l$, tj.:
+\begin{equation}
+    \bm{Q}_{k,l} =\sum_{i=0}^{n}N_{i,p}(\bar{u}_k)
+    \left(\sum_{j=0}^{m}N_{j,q}(\bar{v}_l)\bm{P}_{i,j}\right)
+    =\sum_{i=0}^{n}N_{i,p}(\bar{u}_k)\bm{R}_{i,l}
+\end{equation}
+kde \begin{equation}
+    \bm{R}_{i,l} = \sum_{j=0}^{m}N_{j,q}(\bar{v}_l)\bm{P}_{i,j}
+\end{equation}
+Tato metoda funguje pro libovolné pořadí směru interpolace křivek.
+Ukázka interpolace je na obrázcích č. \ref{fig:Demo interpolace povrchu 1}, \ref{fig:Demo interpolace povrchu 2},
+\ref{fig:NURBS interpolace kompenzační tabulky proudu č. 1},
+\ref{fig:NURBS interpolace kompenzační tabulky proudu č. 2},
+\ref{fig:NURBS interpolace kompenzační tabulky proudu č. 3},
+\ref{fig:NURBS interpolace kompenzační tabulky proudu č. 4}.
+
+\begin{imagepage}
+    \begin{figure}[H]
+        \centering
+        \includegraphics[width=0.95\textwidth]{Generated/Demo interpolace povrchu 1.pdf}
+        \caption{Porovnání algoritmů interpolace ve 2D}
+        \label{fig:Demo interpolace povrchu 1}
+    \end{figure}
+    \begin{figure}[H]
+        \centering
+        \includegraphics[width=0.95\textwidth]{Generated/Demo interpolace povrchu 2.pdf}
+        \caption{Porovnání algoritmů interpolace ve 3D}
+        \label{fig:Demo interpolace povrchu 2}
+    \end{figure}
+\end{imagepage}
