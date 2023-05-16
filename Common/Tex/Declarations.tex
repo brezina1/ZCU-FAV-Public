@@ -1,0 +1,161 @@
+\newenvironment{imagepage}{}{}
+\BeforeBeginEnvironment{imagepage}{
+  \newpage
+  \newgeometry{top=0cm, bottom=0cm}
+  \begin{samepage}
+    \vspace*{\fill}
+    }
+    \AfterEndEnvironment{imagepage}{
+  \end{samepage}
+  \vspace*{\fill}
+  \restoregeometry}
+
+
+\def\imagepageinnermargin{0cm}
+\def\imagepageoutermargin{0cm}
+\newenvironment{landscapeimagepage}{}{}
+\BeforeBeginEnvironment{landscapeimagepage}{
+  \newgeometry{top=0cm, bottom=0cm, left=0cm, right=0cm}
+  \thispagestyle{empty}
+  % \raggedright
+  \newgeometry{top=0cm, bottom=0cm, left=\imagepageoutermargin, right=\imagepageinnermargin}
+                % \ifthispageodd{\pagecolor{yellow}\afterpage{\nopagecolor}}
+                % {\pagecolor{orange}\afterpage{\nopagecolor}}% I'm even
+  % \checkoddpage
+  % \ifoddpage odd%\newgeometry{top=0cm, bottom=0cm, left=\imagepageoutermargin, right=\imagepageinnermargin}
+  % \else%\newgeometry{top=0cm, bottom=0cm, left=\imagepageinnermargin, right=\imagepageoutermargin}
+  %   even
+  % \fi
+  % right je horní strana
+  % \newgeometry{top=0cm, bottom=0cm, left=0cm, right=4cm}
+  \begin{landscape}
+    \thispagestyle{empty}
+    % \ifthispageodd{I'm odd}{I'm even}% I'm even
+    % \begin{samepage}
+    % \vspace*{\fill}
+    }
+    \AfterEndEnvironment{landscapeimagepage}{
+    % \vspace*{\fill}
+    % \end{samepage}
+  \end{landscape}
+  % \raggedbottom
+  \restoregeometry
+  }
+
+\newenvironment{nomargin}{}{}
+\BeforeBeginEnvironment{nomargin}{
+  \newgeometry{top=0cm, bottom=0cm, left=0cm, right=0cm}
+  \vspace*{\fill}
+}
+\AfterEndEnvironment{nomargin}{
+  \vspace*{\fill}
+  \restoregeometry}
+
+\setlength\parindent{0pt}
+
+% https://tex.stackexchange.com/a/102845/255601
+\newcommand{\todo}[1]{\textbf{\large{\textcolor{red}{#1}}}}
+
+\newcommand*\centermathcell[1]{\omit\hfil$\displaystyle#1$\hfil\ignorespaces}
+
+\newcommand{\subsubscheme}[2]{
+  \begin{landscape}
+    \thispagestyle{empty}
+    \includepdf[pagecommand={\subsubsection{#1}\label{#1}},
+      landscape=true,
+      scale=0.95]{#2}
+  \end{landscape}
+}
+
+\newcommand{\subscheme}[2]{
+  \begin{landscape}
+    \thispagestyle{empty}
+    \includepdf[pagecommand={\subsection{#1}\label{#1}},
+      landscape=true,
+      scale=0.95]{#2}
+  \end{landscape}
+}
+
+\newlist{enumerateabc}{enumerate}{1}
+\setlist[enumerateabc]{label=\alph*.}
+
+\DeclareMathOperator*{\argmax}{arg~max}
+\DeclareMathOperator*{\argmin}{arg~min}
+\DeclareMathOperator{\atantwo}{atan2}
+\DeclareMathOperator{\diag}{diag}
+\DeclareMathOperator{\imresize}{imresize}
+\newcommand{\COV}[1]{\operatorname{COV}[#1]}
+\newcommand{\E}[1]{\operatorname{E}[#1]}
+\newcommand{\VAR}[1]{\operatorname{VAR}[#1]}
+
+\DeclarePairedDelimiter\abs{\lvert}{\rvert}
+\DeclarePairedDelimiter\norm{\lVert}{\rVert}
+
+% https://tex.stackexchange.com/a/359261/255601
+\let\olditem\item
+\newcommand{\todoitem}{\let\item\olditem\color{red}\item\preto\item{\color{black}}}
+
+\newcounter{numFrames}
+\newboolean{stop}
+\newcommand{\includeanimation}[3]{
+  %\setcounter{numFrames}{-1} % fileName_0.pdf ... fileName_?.pdf
+  \setcounter{numFrames}{0}
+  \setboolean{stop}{false}
+  \whiledo{\NOT\boolean{stop}}{
+    \stepcounter{numFrames}
+    \IfFileExists{#1\thenumFrames.png}{}{
+      \addtocounter{numFrames}{-1}
+      \setboolean{stop}{true}
+    }
+  }
+  \begin{center}
+    \shorthandoff{-}
+    \animategraphics[autoplay, controls, loop, #3]{#2}{\detokenize{#1}}{0}{\thenumFrames}
+    \shorthandon{-}
+  \end{center}
+}
+\newcommand{\includeanimationframes}[3][]{
+  \setcounter{numFrames}{0}
+  \setboolean{stop}{false}
+  \whiledo{\NOT\boolean{stop}}{
+    \stepcounter{numFrames}
+    \IfFileExists{#2\thenumFrames.png}{}{
+      \addtocounter{numFrames}{-1}
+      \setboolean{stop}{true}
+    }
+  }
+  \foreach \n in {0,...,5}{
+      % \n
+      % \todo{\basiceval{\n*\thenumFrames/5}}
+      \includegraphics[#3]{\detokenize{#2}\basiceval{\n*\thenumFrames/5}.png}
+      \ifnum\n<3
+        #1
+      \fi
+      \ifnum\intcalcMod{\intcalcInc{\n}}{3}=0
+      \else
+        \hspace{1cm}
+      \fi
+    }
+}
+
+\def\basiceval#1{\the\numexpr#1\relax}
+
+\renewcommand*{\thefootnote}{[\arabic{footnote}]}
+
+% ================================================================================================================
+% https://tex.stackexchange.com/questions/60209/how-to-add-an-extra-level-of-sections-with-headings-below-subsubsection
+% https://tex.stackexchange.com/a/60212
+\makeatletter
+\renewcommand\paragraph{\@startsection{paragraph}{4}{\z@}%
+  {-2.5ex\@plus -1ex \@minus -.25ex}%
+  {1.25ex \@plus .25ex}%
+  {\normalfont\normalsize\bfseries}}
+\makeatother
+\setcounter{secnumdepth}{4} % how many sectioning levels to assign numbers to
+\setcounter{tocdepth}{4}    % how many sectioning levels to show in ToC
+% ================================================================================================================
+\makeatletter
+\newcommand\footnoteref[1]{\protected@xdef\@thefnmark{\ref{#1}}\@footnotemark}
+\makeatother
+
+% ================================================================================================================

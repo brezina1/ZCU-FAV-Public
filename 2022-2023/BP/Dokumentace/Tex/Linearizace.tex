@@ -1,0 +1,71 @@
+\section{Linearizace modelu}
+\begin{align}
+    \bm{x} =
+    \begin{bmatrix}
+        x_1 \\
+        x_2
+    \end{bmatrix}
+    = \begin{bmatrix}
+          \varphi \\
+          \dot{\varphi}
+      \end{bmatrix}
+    \\
+    \bm{u} =
+    \begin{bmatrix}
+        u_1
+    \end{bmatrix}
+    = \begin{bmatrix}
+          T
+      \end{bmatrix}
+\end{align}
+Po zderivování získáme:
+\begin{align}
+    \bm{\dot{x}} =
+    \begin{bmatrix}
+        \dot{x}_1 \\
+        \dot{x}_2
+    \end{bmatrix}
+    = \begin{bmatrix}
+          \dot{\varphi} \\
+          \ddot{\varphi}
+      \end{bmatrix}
+    =\begin{bmatrix}
+         x_2 \\
+         \frac{-b\cdot x_2
+             - k\cdot x_1
+             - g\cdot l \cdot m \cdot\sin(x_1) + u_1
+         }{l^2\cdot m}
+     \end{bmatrix}
+\end{align}
+Pokud budeme uvažovat malé úhly $x_1$, můžeme použít aproximaci $\sin(x_1) \approx x_1$:
+\begin{align}
+    \bm{\dot{x}} =\begin{bmatrix}
+                      x_2 \\
+                      \frac{-b\cdot x_2
+                          - k\cdot x_1
+                          - g\cdot l \cdot m \cdot x_1 + u_1
+                      }{l^2\cdot m}
+                  \end{bmatrix}
+\end{align}
+Tuto soustavu rovnic již lze snadno zapíšeme pomocí stavového modelu:
+\begin{alignat}{2}
+          & \bm{A} =
+    \begin{bmatrix}
+        0                                        & 1                     \\
+        \frac{-k -g \cdot l \cdot m}{l^2\cdot m} & \frac{-b}{l^2\cdot m}
+    \end{bmatrix}
+    \quad &                          &
+    \bm{B} =    \begin{bmatrix}
+                    0 \\
+                    \frac{1}{l^2 \cdot m}
+                \end{bmatrix}   \\
+          & \bm{C} = \begin{bmatrix}
+                         1 & 0 \\
+                         0 & 1
+                     \end{bmatrix}
+    \quad &                          &
+    \bm{D} =    \begin{bmatrix}
+                    0 \\
+                    0
+                \end{bmatrix}
+\end{alignat}

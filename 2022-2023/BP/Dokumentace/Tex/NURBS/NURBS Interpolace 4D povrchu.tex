@@ -1,0 +1,59 @@
+\subsubsection[Interpolace 4D nadpovrchu]{Interpolace 4D nadpovrchu\footnote{Téma této sekce již není diskuzí \cite{The_NURBS_Book}, tudíž řešení tohoto problému je již značně postaveno na mých vlastních nápadech realizace.}}\label{section:interpolace 4D povrchu}
+Interpolací 4D nadpovrchu je zde myšleno vytvoření vektorové funkce tří skalárních proměnných např.: $\bm{S}(u,v,\psi)$. Uvažujme sadu 3D povrchů definovaných mřížkou bodů o stejné velikosti $i \times j$. Každý povrch uvažujeme na jiné souřadnici $w$\footnote{Souřadnici $w$ si lze představit jako čas, tím pádem máme sadu 3D povrchů, kde se každý nachází v jakoby jiném časovém okamžiku.}. Přiřazením souřadnice $w$ každému povrchu získají tuto souřadnici také všechny body těchto povrchů, tj. každý bod je tvořen souřadnicemi $[x,y,z,w]$. \par
+Výpočet má následující kroky:
+\begin{enumerate}
+    \item Pro konkrétní hodnoty $i, j$ vybereme body $\bm{Q}_{i,j}$ ze všech rovin.
+          Pro tuto sadu bodů provedeme interpolaci 4D křivky (viz \nameref{section: interpolace křivky}).
+          Tímto získáme $i\times j$ 4D křivek $\bm{C}_{i,j}(u)$.
+    \item \label{4D aproximace krok 2} Pro libovolnou hodnotu $w$, $w_{min} \le w \le w_{max}$ najdeme body $\hat{\bm{Q}}_{i,j}$ na všech křivkách $\bm{C}_{i,j}(u)$ takové, že 4. souřadnice bodů $\hat{\bm{Q}}_{i,j}$ odpovídá zvolené hodnotě~$w$\footnote{Tento výpočet, pokud vím, nelze provést analyticky, existují pouze heuristické metody. Proto pro nalezení vhodné hodnoty s nějakou stanovenou přesností jsem použil metodu půlení intervalu, jelikož horní mez $w_{max}$ a dolní mez $w_{min}$ jsou známy.}.
+    \item \label{4D aproximace krok 3} Předchozím krokem jsme získali mřížku bodů $\hat{\bm{Q}}_{i,j}$ pro konkrétní hodnotu $w$.
+          Mřížku stačí proložit povrchem pomocí \nameref{sec:NURBS interpolace povrchu} a již dostáváme nadpovrch pro danou hodnotu souřadnice $w$\footnote{Opakováním kroků \ref{4D aproximace krok 2} a \ref{4D aproximace krok 3} lze vypočítat zbylé potřebné povrchy s libovolným rozlišením souřadnice~$w$.}.
+\end{enumerate}
+Nadpovrch lze vizualizovat například pomocí animace jako průchod mezi klasickými povrchy prostřednictvím zbývající proměnné $w$.
+Tento algoritmus je například vhodný v případě, že bychom chtěli vyplnit ``prázdný'' prostor souřadnice $Ids$ mezi tabulkami \ref{fig:kompenzace proudu reálná data 1} a \ref{fig:kompenzace proudu reálná data 2}.\par
+Vizualizaci 4D povrchu, který je tvořen třemi 3D povrchy:
+\begin{alignat}{3}
+    \bm{Q}_{i,j}(1) & = [\bm{X}, \bm{Y}, \bm{Z}, \bm{W}] & = & [\bm{X}, \bm{Y}, \cos(\bm{X}) + \bm{Y}, 10]                   \\
+    \bm{Q}_{i,j}(2) & = [\bm{X}, \bm{Y}, \bm{Z}, \bm{W}] & = & [\bm{X}, \bm{Y}, \cos(\bm{Y}) + \bm{X}, 20]                   \\
+    \bm{Q}_{i,j}(3) & = [\bm{X}, \bm{Y}, \bm{Z}, \bm{W}] & = & [\bm{X}, \bm{Y}, \cos(2\cdot\bm{Y}) + \cos(2\cdot\bm{X}), 30]
+\end{alignat}
+lze vidět na animaci na obrázku č.~\ref{fig:Demo 4D Interpolace mezi povrchy č. 1}.
+\ifthenelse{\boolean{includeAnimations}}{
+    \begin{landscapeimagepage}
+        \begin{figure}[H]
+            \centering
+            \includegraphics[width=0.33\pdfpagewidth]{Generated/Interpolace 4d povrchu část 1 č. 1.pdf}\hspace{0.5cm}
+            \includegraphics[width=0.33\pdfpagewidth]{Generated/Interpolace 4d povrchu část 2 č. 1.pdf}\hspace{0.5cm}
+            \includegraphics[width=0.33\pdfpagewidth]{Generated/Interpolace 4d povrchu část 3 č. 1.pdf}
+            \caption{Interpolační povrchy pro 4D interpolaci č. 1}
+        \end{figure}
+        \vfill
+        \begin{figure}[H]
+            \centering
+            \includeanimation{Generated/4D surface demo 1/frame-}{12.5}{palindrome, height=0.5\textheight}
+            % \includeanimation{Generated/4D surface demo 1/frame-}{12.5}{palindrome, height=0.5\textheight}
+            \caption{Ukázka průběhu interpolace mezi povrchy přes souřadnici $w$ č. 1}
+            \label{fig:Demo 4D Interpolace mezi povrchy č. 1}
+        \end{figure}
+    \end{landscapeimagepage}
+}{}
+\ifthenelse{\boolean{includeAnimationFrames}}{
+    \begin{landscapeimagepage}
+        \begin{figure}[H]
+            \centering
+            \includegraphics[width=0.33\pdfpagewidth]{Generated/Interpolace 4d povrchu část 1 č. 1.pdf}\hspace{0.5cm}
+            \includegraphics[width=0.33\pdfpagewidth]{Generated/Interpolace 4d povrchu část 2 č. 1.pdf}\hspace{0.5cm}
+            \includegraphics[width=0.33\pdfpagewidth]{Generated/Interpolace 4d povrchu část 3 č. 1.pdf}
+            \caption{Interpolační povrchy pro 4D interpolaci č. 1}
+        \end{figure}
+        \vfill
+        \begin{figure}[H]
+            \centering
+            \includeanimationframes{Generated/4D surface demo 1/frame-}{height=0.235\pdfpagewidth}
+            % \includeanimation{Generated/4D surface demo 1/frame-}{12.5}{palindrome, height=0.5\textheight}
+            \caption{Ukázka průběhu interpolace mezi povrchy přes souřadnici $w$ č. 1}
+            \label{fig:Demo 4D Interpolace mezi povrchy č. 1}
+        \end{figure}
+    \end{landscapeimagepage}
+}{}
+
