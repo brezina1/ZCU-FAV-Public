@@ -1,9 +1,0 @@
-\section{Závěr}
-Cílem této práce bylo navrhnout automatickou aktualizaci proudové kalibrační tabulky na základě naměřených dat získaných za běžného užívání manipulátoru.
-\par
-Nejprve jsme popsali řízený a řídící systém, včetně schématu regulační smyčky na kterém je ukázáno jak kalibrační tabulka spolupracuje s regulátorem. V další obsáhlé kapitole jsme rozebrali veškerou teorii k NURBS splinům, konkrétně NURBS 2D a 3D křivkám, 3D a 4D (nad)povrchům a k nim příslušné přístupy interpolace a aproximace včetně jejich ukázek.
-\par 
-Poslední kapitola obsahuje již samostatné zpracování záznamů pohybu manipulátoru, které poskytla společnost Phillips za účelem tohoto výzkumu a vývoje. Podařilo se nám ověřit existenci vhodných bodů pro aktualizaci CCT při manuální operaci manipulátoru uživatelem. Pomocí těchto extrahovaných bodů jsme potom úspěšně sestavili vlastní verze kalibračních tabulek. Tyto nové verze tabulek jsme využily pro odzkoušení aktualizace původních verzí CCT.
-\par
-\todo{změnit}
-Na tuto práci by se dalo dále navázat dalším výzkumem, který by se pravděpodobně zabýval lepším přístupem k aproximaci 3D/4D (nad)povrchu, který je tvořen body neležícími v mřížce --- tj. například pokusit se na tento problém také aplikovat metodu nejmenších čtverců, aby vzniklé řešení bylo matematicky podmíněné. Dále je otázkou dalšího výzkumu rozsáhlejší sběr aktualizačních bodů pro CCT --- momentálně námi navržený způsob sběru dat v kombinaci s naší 4D aproximací pomocí Gaussovo funkce téměř nikdy neaktualizuje body CCT ležící v mezních polohách kloubů.

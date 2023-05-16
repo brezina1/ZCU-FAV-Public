@@ -1,9 +1,0 @@
-\section{NURBS teorie}\label{section: NURBS teorie}
-Tato kapitola je zaměřena na algoritmy pro práci s NURBS křivkami/povrchy, které jsou ručně implementovány v Matlabu podle knížky \cite{The_NURBS_Book}. V každé podkapitole je uveden odpovídající zdroj z této knížky. Implementace těchto algoritmů je nezbytná pro realizaci autonomní rekalibrace CCT dle návrhu uvedeného v předchozích kapitolách.
-% \par
-% V kapitole se hojně užívá pojmů ``interpolace'' a ``aproximace'', popřípadě ještě ``extrapolace'', zde je vysvětlení těchto pojmů:
-% \begin{itemize}
-%     \item Interpolace --- Hledání spojité funkce, jejichž funkční hodnoty odpovídají námi zadaným hodnotám na příslušných souřadnicích. Existuje mnoho interpolačních metod například: lineární interpolace, kosinové interpolace, kubická interpolace a polynomiální interpolace. Zejména polynomiální interpolace není pro naše účely vhodná, protože pro velké množství bodů nabývá vysokého řádu a má tendenci kmitat, toto obzvlášť platí pro ekvidistantně zadané interpolační body.
-%     \item Aproximace --- Hledání spojité funkce, která nějakým vhodným způsobem pro danou úlohu nejlépe popisuje aproximační body. Pro naše účely budeme používat NURBS aproximaci založenou na vážené metodě nejmenších čtverců. Tento přístup nám umožní volit stupeň polynomu bázových funkcí, míru redukce bodů (pomocí počtu řídících bodů) a také váhy jednotlivých bodů.
-%     \item Extrapolace --- Využití interpolované/aproximované funkce mimo původní rozsah interpolačních/aproximačních bodů. Přesnost extrapolace závisí na charakteru zvolené interpolační/aproximační metody a zdrojových dat. V této práci se extrapolace nevyužívá, protože jí není potřeba, a také proto, že NURBS metodu nelze pro extrapolaci použít.
-% \end{itemize}
