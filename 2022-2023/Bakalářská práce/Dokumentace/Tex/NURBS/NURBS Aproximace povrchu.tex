@@ -1,12 +1,12 @@
 \subsection{NURBS aproximace povrchu\label{section:aproximace povrchu}}
-Stejně jako u interpolace počítáme s množinou $(r + 1)\times(s + 1)$ bodů
-$\bm{Q}_{k,l}$, $k=0,\ldots, r$ a $l = 0, \ldots, s$ ležících v mřížce, které chceme aproximovat
+Stejně jako u~interpolace počítáme s~množinou $(r + 1)\times(s + 1)$ bodů
+$\bm{Q}_{k,l}$, $k=0,\ldots, r$ a $l = 0, \ldots, s$ ležících v~mřížce, které chceme aproximovat
 pomocí vážené metody nejmenších čtverců NURBS povrchem stupně $p$ a $q$ ve
 tvaru:
 \begin{align}
     S(\bar{u}_k, \bar{v}_l) = \sum_{i=0}^{r}\sum_{j=0}^{s}N_{i,p}(\bar{u}_k)N_{j,q}(\bar{v}_l)\bm{P}_{i,j}
 \end{align}
-Tento algoritmus interpoluje všechny rohové body a zbytek aproximuje, tj. aproximovaná plocha je tvořena body:
+Tento algoritmus interpoluje všechny rohové body a~zbytek aproximuje, tj.~aproximovaná plocha je tvořena body:
 \begin{align}
     \begin{matrix}
         \bm{Q}_{0, 0}         & \hat{\bm{Q}}_{0, 1} & \cdots & \hat{\bm{Q}}_{0, s-1}   & \bm{Q}_{0, s}         \\
@@ -16,13 +16,13 @@ Tento algoritmus interpoluje všechny rohové body a zbytek aproximuje, tj. apro
         \bm{Q}_{r, 0}         & \hat{\bm{Q}}_{r, 1} & \cdots & \hat{\bm{Q}}_{r-1, s-1} & \bm{Q}_{r,s}          \\
     \end{matrix}
 \end{align}
-kde $\hat{\bm{Q}}_{i,j}$ je aproximovaný body $\bm{Q}_{i,j}$.\par
-Stejně jako u interpolace povrchu budeme nejprve aproximovat křivky
-v jednom směru a poté ve druhém. Parametry $\bar{u}_k$ a $\bar{v}_l$ a uzlové
+kde $\hat{\bm{Q}}_{i,j}$ je aproximované body $\bm{Q}_{i,j}$.\par
+Stejně jako u~interpolace povrchu budeme nejprve aproximovat křivky
+v jednom směru a~poté ve druhém. Parametry $\bar{u}_k$ a $\bar{v}_l$ a~uzlové
 vektory $\bm{U}$ a $\bm{V}$ získáme stejně jako
 u interpolace povrchu~-~viz~\ref{sec:NURBS interpolace povrchu}.
 Nejprve aproximujeme body ve směru $u$, tím získáme tenzor řídících
-bodů aproximačních křivek $\bm{T}$ o rozměrech $(n + 1) \times (s + 1) \times (\dim{\bm{Q}})$:
+bodů aproximačních křivek $\bm{T}$ o~rozměrech $(n + 1) \times (s + 1) \times (\dim{\bm{Q}})$:
 \begin{alignat}{3}
     \bm{T}_{0, i}              & = \bm{Q}_{0, i}                                   & \quad i = 0, \ldots, s \\
     \bm{T}_{n, i}              & = \bm{Q}_{r, i}                                   & \quad i = 0, \ldots, s \\
@@ -67,7 +67,7 @@ kde:
               \bm{R}^u_k(i)  = \bm{Q}_{k,i} - N_{0, p}(\bar{u}_k)\bm{Q}_{0,i} - N_{n,p}(\bar{u}_k)\bm{Q}_{r,i} \quad\quad k = 1, \ldots, r -1
           \end{equation}
 \end{itemize}
-Nyní stačí vypočítat řídící body aproximovaného povrchu $\bm{P}$ o stejných rozměrech
+Nyní stačí vypočítat řídící body aproximovaného povrchu $\bm{P}$ o~stejných rozměrech
 jako je $\bm{T}$.
 Postup je analogický ke směru $u$, kde jako nové aproximační body použijeme
 $\bm{T}$, tj.:
@@ -109,7 +109,7 @@ kde:
           Po provedení aproximace ve směru $u$ máme pro aproximaci ve směru $v$,
           pouze $(n+1)\times(s+1)$ bodů (namísto původních $(r+1)\times(s+1)$),
           proto je tato redukce nutná.
-          Důležité je, že výsledné prvky matice v sobě nějakým způsobem nesou
+          Důležité je, že výsledné prvky matice v~sobě nějakým způsobem nesou
           váhy pro matici původní velikosti.
           Funkce \texttt{imresize} může produkovat záporné hodnoty,
           ty ale stačí nahradit například výchozí hodnotou $1$.
@@ -127,7 +127,7 @@ kde:
               \bm{R}^v_l(i)  = \bm{T}_{i,l} - N_{0, q}(\bar{v}_l)\bm{T}_{i,0} - N_{m,q}(\bar{v}_l)\bm{T}_{i, s} \quad\quad l = 1, \ldots, s -1
           \end{equation}
 \end{itemize}
-Ukázka různých aproximací jsou na obrázcích č. \ref{fig:Demo aproximace povrchu č. 1},
+Ukázky různých aproximací jsou na obrázcích č. \ref{fig:Demo aproximace povrchu č. 1},
 \ref{fig:Demo aproximace povrchu č. 2},
 \ref{fig:Demo aproximace povrchu pro různé váhy č. 1},
 \ref{fig:Demo aproximace povrchu pro různé váhy č. 2},

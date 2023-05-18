@@ -331,6 +331,6 @@ campos([-4.4589   -3.6023    6.2948]);
 xlabel("$C_{Arc}$");
 ylabel("$Prop$");
 zlabel("Proud");
-title(latexify(["Výsledek aktualizace CCT --- zpětný pohyb, $Ids=1$", "Interpolace výsledků Gaussovo aproximace", "$\omega = 3,\sigma_x = 0.33, \sigma_y = 0.1$"]));
+title(latexify(["Výsledek aktualizace CCT --- zpětný pohyb, $Ids=1$", "Interpolace výsledků Gaussovy aproximace", "$\omega = 3,\sigma_x = 0.33, \sigma_y = 0.1$"]));
 end
 

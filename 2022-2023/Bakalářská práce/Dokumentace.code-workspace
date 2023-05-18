@@ -4,5 +4,9 @@
 			"path": "Dokumentace"
 		}
 	],
-	"settings": {}
+	"settings": {
+		"cSpell.words": [
+			"Azurion"
+		]
+	}
 }

@@ -27,9 +27,9 @@ Q_approx(2, :) = [-4, 1.5, 4];
 weights = [5, 3, 1];
 
 
-titles = {["Aproximace pro povrch ${\bf Z} = 2$ s užitím Gaussovo funkce",...
+titles = {["Aproximace pro povrch ${\bf Z} = 2$ s užitím Gaussovy funkce",...
                 "Aproximačními body: ${\bf Q}_1, {\bf Q}_2, {\bf Q}_3$"],...
-          ["Aproximace pro povrch ${\bf Z} = \cos(2{\bf Y}) + \cos(2{\bf X})$ s užitím Gaussovo funkce",...
+          ["Aproximace pro povrch ${\bf Z} = \cos(2{\bf Y}) + \cos(2{\bf X})$ s užitím Gaussovy funkce",...
                 "Aproximačními body: ${\bf Q}_1, {\bf Q}_2, {\bf Q}_3$"]};
 
 title_index = 1;
@@ -40,7 +40,7 @@ for tmp = Q_
     for sigma_x = [0.25, 0.5]
         for sigma_y = [0.25, 0.5]
             Q = Q_copy;
-            figure("Name", "Ukázka aproximace s užitím Gaussovo funkce č. " + fig_index, "Tag", "HighResolutionImage");
+            figure("Name", "Ukázka aproximace s užitím Gaussovy funkce č. " + fig_index, "Tag", "HighResolutionImage");
 
             Q = gaussSurfaceApproximation(Q, Q_approx, weights, sigma_x, sigma_y);
             hold off;

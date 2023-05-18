@@ -1,10 +1,10 @@
-\subsubsection{NURBS aproximace povrchu s užitím Gaussovy funkce}\label{section: gauss surface approximation 3D}
-Metoda v sekci \nameref{section:aproximace povrchu} vyžaduje, aby aproximační
-body ležely v mřížce (3D i 4D případ), a proto není vhodná pro účely této
-práce. Proto jsem přišel s následující metodou, která sice není postavena na
-žádném matematickém kritériu (jako například nejmenší čtverce v předchozích
-aproximacích), ale nevyžaduje, aby aproximační body ležely v mřížce, a poskytuje
-postačující výsledky. \par Metoda využívá váženého průměrování a Gaussovy
+\subsubsection{NURBS aproximace povrchu s~užitím Gaussovy funkce}\label{section: gauss surface approximation 3D}
+Metoda v~sekci \nameref{section:aproximace povrchu} vyžaduje, aby aproximační
+body ležely v~mřížce (3D i~4D případ), a~proto není vhodná pro účely této
+práce. Proto jsem přišel s~následující metodou, která sice není postavena na
+žádném matematickém kritériu (jako například nejmenší čtverce v~předchozích
+aproximacích), ale nevyžaduje, aby aproximační body ležely v~mřížce, a~poskytuje
+postačující výsledky. \par Metoda využívá váženého průměrování a~Gaussovy
 funkce $f(x, y)$:
 \begin{align}
     f(x,y) = \exp\left(-\left(\frac{(x - x_0)^2}{2\sigma_x^2} + \frac{(y - y_0)^2}{2\sigma_y^2}\right)\right)
@@ -17,17 +17,17 @@ kde
     \item $\sigma_x$ -- variance osy $x$
     \item $\sigma_y$ -- variance osy $y$
 \end{itemize}
-Užitím Gaussovy funkce je zajištěno, že váha aproximovaného bodu se vzdáleností klesá k nule
-(viz obrázky č.~\ref{fig:Ukázka Gaussovo funkce 3D}~a~\ref{fig:Ukázka Gaussovo funkce 4D}),
+Užitím Gaussovy funkce je zajištěno, že váha aproximovaného bodu se vzdáleností klesá k~nule
+(viz obrázky č.~\ref{fig:Ukázka Gaussovy funkce 3D}~a~\ref{fig:Ukázka Gaussovy funkce 4D}),
 díky tomu je možné provádět vážený průměr přes všechny body\footnote{V případě nadměrného množství bodů lze průměrování omezit na okolí aproximovaného bodu pro snížení výpočetní náročnosti.}.\par
 Algoritmus vyžaduje libovolnou množinu původních bodů $\bm{Q}_i$, množinu
-aproximačních bodů $\bar{\bm{Q}}_j$ s množinou příslušných vah $\omega_j$ a již
+aproximačních bodů $\bar{\bm{Q}}_j$ s~množinou příslušných vah $\omega_j$ a~již
 zmíněné parametry $\sigma_x$, $\sigma_y$\footnote{V případě potřeby algoritmus lze snadno
     upravit tak, že parametry $\sigma_x$ a $\sigma_y$ mohou být zadány individuálně
     pro každý aproximační bod $\bar{\bm{Q}}_j$}. Kroky algoritmu jsou následující:
 \begin{enumerate}
-    \item \label{gauss approx krok 1} Zvol další aproximační bod $\bar{\bm{Q}} = [x_{ap}, y_{ap}, z_{ap}]$ a jeho váhu $w$
-    \item Projdi všechny body $\bm{Q}_i = [x,y,z]$ a pro každý proveď:
+    \item \label{gauss approx krok 1} Zvol další aproximační bod $\bar{\bm{Q}} = [x_{ap}, y_{ap}, z_{ap}]$ a~jeho váhu $w$
+    \item Projdi všechny body $\bm{Q}_i = [x,y,z]$ a~pro každý proveď:
           \begin{enumerate}
               \item $\bar{\omega} = \omega \cdot f(x, y) \quad \quad x_0 = x_{ap},~y_0 = y_{ap}$\\
                     {\tiny{(Výpočet upravené váhy na základě vzdálenosti od aproximovaného bodu)}}
@@ -38,23 +38,23 @@ zmíněné parametry $\sigma_x$, $\sigma_y$\footnote{V případě potřeby algor
     \item Vrať se na krok~\ref{gauss approx krok 1}, pokud si neprošel všechny
           aproximační body, jinak konec
 \end{enumerate}
-Pomocí parametrů $\sigma_x, \sigma_y$ lze upřednostnit aproximaci v ose $x$ nebo $y$. Tento efekt lze vidět na obrázcích
-č.~\ref{fig:Ukázka aproximace povrchu s užitím Gaussovo funkce č. 1},
-\ref{fig:Ukázka aproximace povrchu s užitím Gaussovo funkce č. 2},
-\ref{fig:Ukázka aproximace povrchu s užitím Gaussovo funkce č. 3},
-\ref{fig:Ukázka aproximace povrchu s užitím Gaussovo funkce č. 4},
-\ref{fig:Ukázka aproximace povrchu s užitím Gaussovo funkce č. 5},
-\ref{fig:Ukázka aproximace povrchu s užitím Gaussovo funkce č. 6},
-\ref{fig:Ukázka aproximace povrchu s užitím Gaussovo funkce č. 7},
-\ref{fig:Ukázka aproximace povrchu s užitím Gaussovo funkce č. 8},
-kde je obsažena i samotná ukázka takto navržené aproximace\footnote{Přestože
-    ukázky obsahují povrchy tvořeny body v mřížce, není to vyžadováno výpočetním algoritmem.
+Pomocí parametrů $\sigma_x, \sigma_y$ lze upřednostnit aproximaci v~ose $x$ nebo $y$. Tento efekt lze vidět na obrázcích
+č.~\ref{fig:Ukázka aproximace povrchu s~užitím Gaussovy funkce č. 1},
+\ref{fig:Ukázka aproximace povrchu s~užitím Gaussovy funkce č. 2},
+\ref{fig:Ukázka aproximace povrchu s~užitím Gaussovy funkce č. 3},
+\ref{fig:Ukázka aproximace povrchu s~užitím Gaussovy funkce č. 4},
+\ref{fig:Ukázka aproximace povrchu s~užitím Gaussovy funkce č. 5},
+\ref{fig:Ukázka aproximace povrchu s~užitím Gaussovy funkce č. 6},
+\ref{fig:Ukázka aproximace povrchu s~užitím Gaussovy funkce č. 7},
+\ref{fig:Ukázka aproximace povrchu s~užitím Gaussovy funkce č. 8},
+kde je obsažena i~samotná ukázka takto navržené aproximace\footnote{Přestože
+    ukázky obsahují povrchy tvořeny body v~mřížce, není to vyžadováno výpočetním algoritmem.
 }.
 \begin{figure}[H]
     \centering
-    \includegraphics[width=\textwidth]{Generated/Ukázka Gaussovo funkce 3D.pdf}
-    \caption{Ukázka Gaussovo funkce $f(x,y)$}
-    \label{fig:Ukázka Gaussovo funkce 3D}
+    \includegraphics[width=\textwidth]{Generated/Ukázka Gaussovy funkce 3D.pdf}
+    \caption{Ukázka Gaussovy funkce $f(x,y)$}
+    \label{fig:Ukázka Gaussovy funkce 3D}
 \end{figure}
 \begin{landscapeimagepage}
     \vspace*{\fill}
@@ -62,34 +62,34 @@ kde je obsažena i samotná ukázka takto navržené aproximace\footnote{Přesto
         \centering
         \begin{subfigure}{.5\textheight}
             \centering
-            \includegraphics[width=\textwidth]{Generated/Ukázka aproximace s užitím Gaussovo funkce č. 1.pdf}
-            \caption{Aproximace pro různé parametry Gaussovo funkce č.~1}
-            \label{fig:Ukázka aproximace povrchu s užitím Gaussovo funkce č. 1}
+            \includegraphics[width=\textwidth]{Generated/Ukázka aproximace s užitím Gaussovy funkce č. 1.pdf}
+            \caption{Aproximace pro různé parametry Gaussovy funkce č.~1}
+            \label{fig:Ukázka aproximace povrchu s~užitím Gaussovy funkce č. 1}
         \end{subfigure}
         \vspace{0.5cm}
         \hspace{2.5cm}
         \begin{subfigure}{.5\textheight}
             \centering
-            \includegraphics[width=\textwidth]{Generated/Ukázka aproximace s užitím Gaussovo funkce č. 2.pdf}
-            \caption{Aproximace pro různé parametry Gaussovo funkce č.~2}
-            \label{fig:Ukázka aproximace povrchu s užitím Gaussovo funkce č. 2}
+            \includegraphics[width=\textwidth]{Generated/Ukázka aproximace s užitím Gaussovy funkce č. 2.pdf}
+            \caption{Aproximace pro různé parametry Gaussovy funkce č.~2}
+            \label{fig:Ukázka aproximace povrchu s~užitím Gaussovy funkce č. 2}
         \end{subfigure}
         \vspace{0.5cm}
         \begin{subfigure}{.5\textheight}
             \centering
-            \includegraphics[width=\textwidth]{Generated/Ukázka aproximace s užitím Gaussovo funkce č. 3.pdf}
-            \caption{Aproximace pro různé parametry Gaussovo funkce č.~3}
-            \label{fig:Ukázka aproximace povrchu s užitím Gaussovo funkce č. 3}
+            \includegraphics[width=\textwidth]{Generated/Ukázka aproximace s užitím Gaussovy funkce č. 3.pdf}
+            \caption{Aproximace pro různé parametry Gaussovy funkce č.~3}
+            \label{fig:Ukázka aproximace povrchu s~užitím Gaussovy funkce č. 3}
         \end{subfigure}
         \hspace{2.5cm}
         \begin{subfigure}{.5\textheight}
             \centering
-            \includegraphics[width=\textwidth]{Generated/Ukázka aproximace s užitím Gaussovo funkce č. 4.pdf}
-            \caption{Aproximace pro různé parametry Gaussovo funkce č.~4}
-            \label{fig:Ukázka aproximace povrchu s užitím Gaussovo funkce č. 4}
+            \includegraphics[width=\textwidth]{Generated/Ukázka aproximace s užitím Gaussovy funkce č. 4.pdf}
+            \caption{Aproximace pro různé parametry Gaussovy funkce č.~4}
+            \label{fig:Ukázka aproximace povrchu s~užitím Gaussovy funkce č. 4}
         \end{subfigure}
-        \caption{Ukázka aproximace povrchu č. 1 s užitím Gaussovo funkce s různými parametry}
-        \label{fig:Ukázka aproximace povrchu č. 1 s užitím Gaussovo funkce s různými parametry}
+        \caption{Ukázka aproximace povrchu č. 1 s~užitím Gaussovy funkce s~různými parametry}
+        \label{fig:Ukázka aproximace povrchu č. 1 s~užitím Gaussovy funkce s~různými parametry}
     \end{figure}
     \vspace*{\fill}
 \end{landscapeimagepage}
@@ -100,34 +100,34 @@ kde je obsažena i samotná ukázka takto navržené aproximace\footnote{Přesto
         \centering
         \begin{subfigure}{.5\textheight}
             \centering
-            \includegraphics[width=\textwidth]{Generated/Ukázka aproximace s užitím Gaussovo funkce č. 5.pdf}
-            \caption{Aproximace pro různé parametry Gaussovo funkce č.~5}
-            \label{fig:Ukázka aproximace povrchu s užitím Gaussovo funkce č. 5}
+            \includegraphics[width=\textwidth]{Generated/Ukázka aproximace s užitím Gaussovy funkce č. 5.pdf}
+            \caption{Aproximace pro různé parametry Gaussovy funkce č.~5}
+            \label{fig:Ukázka aproximace povrchu s~užitím Gaussovy funkce č. 5}
         \end{subfigure}
         \vspace{0.5cm}
         \hspace{2.5cm}
         \begin{subfigure}{.5\textheight}
             \centering
-            \includegraphics[width=\textwidth]{Generated/Ukázka aproximace s užitím Gaussovo funkce č. 6.pdf}
-            \caption{Aproximace pro různé parametry Gaussovo funkce č.~6}
-            \label{fig:Ukázka aproximace povrchu s užitím Gaussovo funkce č. 6}
+            \includegraphics[width=\textwidth]{Generated/Ukázka aproximace s užitím Gaussovy funkce č. 6.pdf}
+            \caption{Aproximace pro různé parametry Gaussovy funkce č.~6}
+            \label{fig:Ukázka aproximace povrchu s~užitím Gaussovy funkce č. 6}
         \end{subfigure}
         \vspace{0.5cm}
         \begin{subfigure}{.5\textheight}
             \centering
-            \includegraphics[width=\textwidth]{Generated/Ukázka aproximace s užitím Gaussovo funkce č. 7.pdf}
-            \caption{Aproximace pro různé parametry Gaussovo funkce č.~7}
-            \label{fig:Ukázka aproximace povrchu s užitím Gaussovo funkce č. 7}
+            \includegraphics[width=\textwidth]{Generated/Ukázka aproximace s užitím Gaussovy funkce č. 7.pdf}
+            \caption{Aproximace pro různé parametry Gaussovy funkce č.~7}
+            \label{fig:Ukázka aproximace povrchu s~užitím Gaussovy funkce č. 7}
         \end{subfigure}
         \hspace{2.5cm}
         \begin{subfigure}{.5\textheight}
             \centering
-            \includegraphics[width=\textwidth]{Generated/Ukázka aproximace s užitím Gaussovo funkce č. 8.pdf}
-            \caption{Aproximace pro různé parametry Gaussovo funkce č.~8}
-            \label{fig:Ukázka aproximace povrchu s užitím Gaussovo funkce č. 8}
+            \includegraphics[width=\textwidth]{Generated/Ukázka aproximace s užitím Gaussovy funkce č. 8.pdf}
+            \caption{Aproximace pro různé parametry Gaussovy funkce č.~8}
+            \label{fig:Ukázka aproximace povrchu s~užitím Gaussovy funkce č. 8}
         \end{subfigure}
-        \caption{Ukázka aproximace povrchu č. 2 s užitím Gaussovo funkce s různými parametry}
-        \label{fig:Ukázka aproximace povrchu č. 2 s užitím Gaussovo funkce s různými parametry}
+        \caption{Ukázka aproximace povrchu č. 2 s~užitím Gaussovy funkce s~různými parametry}
+        \label{fig:Ukázka aproximace povrchu č. 2 s~užitím Gaussovy funkce s~různými parametry}
     \end{figure}
     \vspace*{\fill}
 \end{landscapeimagepage}

@@ -119,7 +119,7 @@ for i = 1 : length(Q)
     [n, m, U, V, P] = globalSurfaceInterpolation(Q{i}, 3, 3);
     points = nurbsSurfaceEval(n, U, m, V, 3, 3, P, [size(P, 1) + 1, 50]);
     surf(points(:,:,1), points(:,:,2), points(:,:,3));
-    title(latexify("Interpolační povrch, $w = " + Q{i}(1,1,4) + "$"));
+    title(latexify("Interpolační povrch, $Ids = " + Q{i}(1,1,4) + "$"));
 %     xlim([minXY, maxXY]);
 %     ylim([minXY, maxXY]);
     zlim([minZ, maxZ]);
@@ -190,7 +190,7 @@ for i = 1 : length(Q)
     [n, m, U, V, P] = globalSurfaceInterpolation(Q{i}, 3, 3);
     points = nurbsSurfaceEval(n, U, m, V, 3, 3, P, [size(P, 1) + 1, 50]);
     surf(points(:,:,1), points(:,:,2), points(:,:,3));
-    title(latexify("Interpolační povrch, $w = " + Q{i}(1,1,4) + "$"));
+    title(latexify("Interpolační povrch, $Ids = " + Q{i}(1,1,4) + "$"));
 %     xlim([minXY, maxXY]);
 %     ylim([minXY, maxXY]);
     zlim([minZ, maxZ]);

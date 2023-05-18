@@ -1,19 +1,19 @@
 \subsection{Struktura řídícího systému}
 Kompenzace proudu pohonu pro osu $C_{Arc}$ je závislá na polohách všech tří kloubů
-($C_{Arc}$, $Prop$, $Ids$) a také na směru pohybu\footnote{Kompenzace proudu pohonu pro zbylé osy také pravděpodobně závisí na ostatních osách, nicméně jsou dostupná data pouze pro kompenzační tabulku osy $C_{Arc}$}.
+($C_{Arc}$, $Prop$, $Ids$) a~také na směru pohybu\footnote{Kompenzace proudu pohonu pro zbylé osy také pravděpodobně závisí na ostatních osách, nicméně jsou dostupná data pouze pro kompenzační tabulku osy $C_{Arc}$}.
 
-% Pro zatím uvažujeme pouze dvě možné polohy kloubu $Ids$ a dva možné směry pohybu (dopředný a zpětný), což nám umožní závislost zaznamenávat pomocí čtyř 2D tabulek. Současná implementace kompenzačních tabulek je postavena právě na tomto rozdělení na 4 tabulky pro každý kloub. 
-V současném řídícím algoritmu jsou uvažovány pouze dvě možné polohy kloubu $Ids$ a dva možné směry pohybu (dopředný a zpětný), což nám umožní vizualizovat proudovou kalibrační tabulku prostřednictvím čtyř 3D grafů povrchu.
-Vizualizovaná data z těchto 4 tabulek pro kloub $C_{Arc}$ lze vidět na obrázcích č. \ref{fig:kompenzace proudu reálná data 1}, \ref{fig:kompenzace proudu reálná data 2},
+% Pro zatím uvažujeme pouze dvě možné polohy kloubu $Ids$ a~dva možné směry pohybu (dopředný a~zpětný), což nám umožní závislost zaznamenávat pomocí čtyř 2D tabulek. Současná implementace kompenzačních tabulek je postavena právě na tomto rozdělení na 4 tabulky pro každý kloub. 
+V současném řídícím algoritmu jsou uvažovány pouze dvě možné polohy kloubu $Ids$ a~dva možné směry pohybu (dopředný a~zpětný), což nám umožní vizualizovat proudovou kalibrační tabulku prostřednictvím čtyř 3D grafů povrchu. Vizualizovaná data z~těchto 4 tabulek pro kloub $C_{Arc}$ lze vidět na obrázcích č. \ref{fig:kompenzace proudu reálná data 1}, \ref{fig:kompenzace proudu reálná data 2},
 \ref{fig:kompenzace proudu reálná data 3}, \ref{fig:kompenzace proudu reálná data 4}.
 
 \subsubsection{Schéma regulační smyčky}
-K zajištění přesného a plynulého pohybu regulační smyčka obsahuje 3 hlavní kompenzátory:
+K zajištění přesného a~plynulého pohybu regulační smyčka obsahuje 3 hlavní kompenzátory:
 \begin{itemize}
-    \item $C_{PID}$ --- zpětnovazební PID regulátor \todo{dohodit lepší popis}
-    \item $C_{FF}$ --- přímovazební modelově orientovaný regulátor
-    \item $CCT$ --- přímovazební datově orientovaný regulátor v podobě kompenzační tabulky
+    \item $C_{PID}$ --- zpětnovazební PID regulátor, který je zodpovědný za přesné sledování referenční  trajektorie polohy. Regulátor porovnává skutečnou polohu kloubu s požadovanou a na základě jejich rozdílu provádí akční zásahy, aby zajistil co nejpřesnější sledování referenční hodnoty.
+    \item $C_{FF}$ --- přímovazební modelově orientovaný regulátor sloužící především ke kompenzaci setrvačnosti a částečně i tření manipulátoru. Tato dopředná vazba se podílí na akční veličině $u$ na základě modelovaných účinků těchto vlivů pro konkrétní stav (např.: poloha, rychlost, zrychlení) a parametry stroje.
+    \item $CCT$ --- přímovazební datově orientovaný regulátor v~podobě kompenzační tabulky sloužící ke kompenzaci statické části tření a vnějších momentů způsobených gravitací, vedením kabelů, odporem převodovky a tak podobně. Tato tabulka obsahuje kalibrační hodnoty, které se též podílí na akční veličině $u$ za cílem dosažení co nejplynulejšího pohybu manipulátoru.
 \end{itemize}
+\pagebreak
 Schéma regulační smyčky pro polohu kloubu $C_{Arc}$ vypadá přibližně takto:
 \tikzset
 {
@@ -81,8 +81,8 @@ Schéma regulační smyčky pro polohu kloubu $C_{Arc}$ vypadá přibližně tak
     \end{tikzpicture}
     \caption{Schéma regulační smyčky CT pro jednu osu --- $C_{Arc}$}
 \end{figure}
-Oba regulátory běžně operují v řádu ampér, zatímco kompenzační tabulka v řádu stovek miliampér.
-To naznačuje, že tabulka má největší vliv při malých rychlostech (např. při precizních pohybech), kdy výstupy regulátorů jsou v podobném rozsahu jako tabulka.
+Oba regulátory běžně operují v~řádu ampér, zatímco kompenzační tabulka v~řádu stovek miliampér.
+To naznačuje, že tabulka má největší vliv při malých rychlostech (např. při precizních pohybech), kdy výstupy regulátorů jsou v~podobném rozsahu jako výstup proudové kompenzační tabulky.
 % Cílem práce je takto uspořádané kompenzační tabulky vhodně automaticky aktualizovat
 % na základě naměřených hodnot při běžné činnosti robota.
 
@@ -93,7 +93,7 @@ To naznačuje, že tabulka má největší vliv při malých rychlostech (např.
         \begin{subfigure}{.5\textheight}
             \centering
             \includegraphics[width=\textwidth]{Generated/Plot kompenzace proudu - reálná data 1.pdf}
-            \caption{Vizualizace kompenzační tabulky pro osu $x$ --- dopředný pohyb, $Ids = 0$}
+            \caption{Vizualizace kompenzační tabulky pro osu $C_{Arc}$ --- dopředný pohyb, $Ids = 0$}
             \label{fig:kompenzace proudu reálná data 1}
         \end{subfigure}
         \vspace{0.5cm}
@@ -101,24 +101,24 @@ To naznačuje, že tabulka má největší vliv při malých rychlostech (např.
         \begin{subfigure}{.5\textheight}
             \centering
             \includegraphics[width=\textwidth]{Generated/Plot kompenzace proudu - reálná data 2.pdf}
-            \caption{Vizualizace kompenzační tabulky pro osu $x$ --- dopředný pohyb, $Ids = 1$}
+            \caption{Vizualizace kompenzační tabulky pro osu $C_{Arc}$ --- dopředný pohyb, $Ids = 1$}
             \label{fig:kompenzace proudu reálná data 2}
         \end{subfigure}
         \vspace{0.5cm}
         \begin{subfigure}{.5\textheight}
             \centering
                     \includegraphics[width=\textwidth]{Generated/Plot kompenzace proudu - reálná data 3.pdf}
-                    \caption{Vizualizace kompenzační tabulky pro osu $x$ --- zpětný pohyb, $Ids = 0$}
+                    \caption{Vizualizace kompenzační tabulky pro osu $C_{Arc}$ --- zpětný pohyb, $Ids = 0$}
                     \label{fig:kompenzace proudu reálná data 3}
         \end{subfigure}
         \hspace{2.5cm}
         \begin{subfigure}{.5\textheight}
                 \centering
             \includegraphics[width=\textwidth]{Generated/Plot kompenzace proudu - reálná data 4.pdf}
-            \caption{Vizualizace kompenzační tabulky pro osu $x$ --- dopředný pohyb, $Ids = 1$}
+            \caption{Vizualizace kompenzační tabulky pro osu $C_{Arc}$ --- zpětný pohyb, $Ids = 1$}
             \label{fig:kompenzace proudu reálná data 4}
         \end{subfigure}
-        \caption{Vizualizace kompenzační tabulek pro osu $C_{Arc}$}
+        \caption{Vizualizace kompenzačních tabulek pro osu $C_{Arc}$}
         \label{fig: Vizualizace kompenzační tabulek pro osu CArc}
     \end{figure}
 \end{landscapeimagepage}

@@ -1,14 +1,15 @@
 \subsection[NURBS interpolace křivky]{NURBS interpolace křivky\footcite[kapitola 9.2.1]{The_NURBS_Book}}\label{section: interpolace křivky}
 Mějme množinu $n + 1$ bodů $\{\bm{Q}_k\}$ $k = 0, \ldots, n$, které chceme
 interpolovat NURBS křivkou stupně $p$. Pokud každému bodu $\bm{Q}_k$ přiřadíme
-parametr $\bar{u}_k$, a vhodně sestrojíme uzlový vektor $\bm{U} = \{u_0, \ldots,
-    u_m\}$, můžeme sestavit soustavu lineárních rovnic o rozměru $(n + 1)\times(n +
+parametr $\bar{u}_k$ a~vhodně sestrojíme uzlový vektor $\bm{U} = \{u_0, \ldots,
+    u_m\}$\footnote{Parametr $m$ je z kapitoly \nameref{section: NURBS křivky}.}, můžeme sestavit soustavu lineárních rovnic o~rozměru $(n + 1)\times(n +
     1)$:
 \begin{equation}
     \bm{Q}_k = \bm{C}(\bar{u}_k) = \sum_{i = 0}^{n}N_{i,p}(\bar{u}_k)\bm{P}_i
 \end{equation}
 kde řídící body $\bm{P}_i$ tvoří našich $n + 1$ neznámých.\par
-Parametr $\bar{u}_k$ lze zvolit více způsoby, z nichž jsou běžné například:
+\pagebreak
+Parametr $\bar{u}_k$ lze zvolit více způsoby, z~nichž jsou běžné například:
 \begin{itemize}
     \item ekvidistantní (equally spaced):
           \begin{alignat}{3}
@@ -43,7 +44,7 @@ Parametr $\bar{u}_k$ lze zvolit více způsoby, z nichž jsou běžné napříkl
               \quad\quad k=1,\ldots,n-1
               \label{eq:centripetal method}
           \end{equation}
-          Tato metoda je vhodná pro obecná data s náhlými změnami směru.
+          Tato metoda je vhodná pro obecná data s~náhlými změnami směru.
 \end{itemize}
 Pro tyto metody je doporučený způsob výpočtu $\bm{U}$ metodou průměrování:
 \begin{alignat}{3}
@@ -53,9 +54,9 @@ Pro tyto metody je doporučený způsob výpočtu $\bm{U}$ metodou průměrován
 Nyní můžeme sestavit matici $\bm{N}$ $(n + 1) \times (n + 1)$:
 \begin{equation}
     \bm{N} = \begin{bmatrix}
-        N_{0,p}(\bar{u}_0)        & \cdots & N_{n+1,p}(\bar{u}_0)       \\
+        N_{0,p}(\bar{u}_0)        & \cdots & N_{n,p}(\bar{u}_0)       \\
         \vdots                    & \ddots & \vdots                     \\
-        N_{0, p}(\bar{u}_{n + 1}) & \cdots & N_{n+1,p}(\bar{u}_{n + 1})
+        N_{0, p}(\bar{u}_{n}) & \cdots & N_{n,p}(\bar{u}_{n})
     \end{bmatrix}
 \end{equation}
 Hledané řídící body $\bm{P}$ již spočteme vyřešením soustavy linárních rovnic:

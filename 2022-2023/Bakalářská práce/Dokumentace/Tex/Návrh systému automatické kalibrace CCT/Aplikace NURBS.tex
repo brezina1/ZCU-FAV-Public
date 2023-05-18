@@ -1,17 +1,17 @@
 \section{Návrh systému automatické kalibrace proudové tabulky}\label{section: návrh automatické kalibraci}
-Tato kapitola se již zabývá aplikací NURBS teorie na náš problém --- tj. užití NURBS teorie pro práci s kalibrační tabulkou. Dále se kapitola zaměřuje na sběr vhodných hodnot pro aktualizace kalibrační tabulky.
+Tato kapitola se již zabývá aplikací NURBS teorie na náš problém --- tj.~užití NURBS teorie pro práci s~kalibrační tabulkou. Dále se kapitola zaměřuje na sběr vhodných hodnot pro aktualizaci kalibrační tabulky.
 \subsection{Aplikace NURBS teorie pro modelování kalibrační tabulky}
-V této kapitole je již použita NURBS interpolace a aproximace na konkrétních datech. Nejprve je uvedena ukázka na 1 DoF modelu, poté na řezu kalibrační tabulkou, kde lze vidět cílenou aproximaci, dále je uvedena 3D a 4D interpolace kompenzačních tabulek.
+V této kapitole je již použita NURBS interpolace a~aproximace na konkrétních datech. Nejprve je uvedena ukázka na 1 DoF modelu, poté na řezu kalibrační tabulkou, kde lze vidět cílenou aproximaci, dále je uvedena 3D a~4D interpolace kompenzačních tabulek.
 \subsubsection{1 DoF model}
-Na obrázku č.~\ref{fig:Cílená aproximace křivky 1 DoF} je ukázka cílené aproximace křivky pro náš 1 DoF model systému. Aproximační body jsme získali úpravou fyzikálních parametrů modelu, zvolené body jsou záměrně mimo ``mřížku'' od původních bodů. Ukázka obsahuje výsledky pro dvě různé váhy aproximačních bodů.
+Na obrázku č.~\ref{fig:Cílená aproximace křivky 1 DoF} je ukázka cílené aproximace křivky pro náš 1 DoF model systému. Aproximační body jsme získali úpravou fyzikálních parametrů modelu, zvolené body jsou záměrně mimo "mřížku" od původních bodů. Ukázka obsahuje výsledky pro dvě různé váhy aproximačních bodů.
 \subsubsection{2D řez kalibrační tabulkou}
 Na obrázcích č.~\ref{fig:Cílená aproximace křivky}, \ref{fig:Cílená aproximace křivky přiblíženo} je ukázka
-cílené aproximace křivky na jedné z kalibračních tabulek pro fixní hodnotu osy $Prop$, kde je lépe ukázáno jak cílená aproximace funguje v detailu. Řez tabulkou jsme získali právě zvolením fixní hodnoty kloubu $Prop$.
+cílené aproximace křivky na jedné z~kalibračních tabulek pro fixní hodnotu osy $Prop$, kde je lépe ukázáno jak cílená aproximace funguje v~detailu. Řez tabulkou jsme získali právě zvolením fixní hodnoty kloubu $Prop$.
 \subsubsection{Interpolace kalibračních tabulek}
-Na obrázcích č.~\ref{fig: Ukázka interpolace na reálných datech č. 1}, \ref{fig: Ukázka interpolace na reálných datech č. 2}, \ref{fig: Ukázka interpolace na reálných datech č. 3}, \ref{fig: Ukázka interpolace na reálných datech č. 4}, napravo lze vidět aplikaci NURBS interpolace povrchu a nalevo lze vidět původní data.
-\todo{Řád povrchu?}
+Na obrázcích č.~\ref{fig: Ukázka interpolace na reálných datech č. 1}, \ref{fig: Ukázka interpolace na reálných datech č. 2}, \ref{fig: Ukázka interpolace na reálných datech č. 3}, \ref{fig: Ukázka interpolace na reálných datech č. 4} lze napravo vidět aplikaci NURBS interpolace povrchu a~nalevo lze vidět původní data.
+Stejně jako v předchozích ukázkách se i zde používají bázové funkce s polynomy 3. stupně, tj. $p = q = 3$.
 \subsubsection{Interpolace napříč kalibračními tabulkami}
-Jak již bylo zmíněno, máme 2 kalibrační tabulky pro dvě polohy kloubu $Ids$, a proto bychom rádi chtěli přes tuto souřadnici interpolovat, abychom získali kalibrační tabulky mezi těmito dvěma polohami. K tomuto využijeme NURBS interpolaci nadpovrchu ze sekce \nameref{section:interpolace 4D povrchu}, výsledné animace jsou na obrázcích č.~\ref{fig:Demo 4D Interpolace mezi povrchy - reálná data dopředný pohyb},
+Jak již bylo zmíněno, máme 2 kalibrační tabulky pro dvě polohy kloubu $Ids$, a~proto bychom rádi chtěli přes tuto souřadnici interpolovat, abychom získali kalibrační tabulky mezi těmito dvěma polohami. K~tomuto využijeme NURBS interpolaci nadpovrchu ze sekce \nameref{section:interpolace 4D povrchu}, výsledné animace jsou na obrázcích č.~\ref{fig:Demo 4D Interpolace mezi povrchy - reálná data dopředný pohyb},
 \ref{fig:Demo 4D Interpolace mezi povrchy - reálná data zpětný pohyb}.
 \begin{figure}[H]
     \centering

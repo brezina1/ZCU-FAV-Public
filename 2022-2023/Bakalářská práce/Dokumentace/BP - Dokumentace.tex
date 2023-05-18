@@ -3,7 +3,7 @@
                         pdftitle={BP - Březina},
                         pdfsubject={Adaptivní přímovazební kompenzace statických sil působících na mechatronický systém}
                         }{hyperref}  
-\documentclass[12pt, czech, twoside]{article}
+\documentclass[12pt, czech]{article}
 \raggedbottom
 \usepackage[czech]{babel}
 
@@ -13,20 +13,20 @@
 \usetikzlibrary{shapes,arrows,positioning,calc}
 
 \newboolean{includeAnimations}
-\setboolean{includeAnimations}{false}
+\setboolean{includeAnimations}{true}
 
 \newboolean{includeAnimationFrames}
-\setboolean{includeAnimationFrames}{true}
+\setboolean{includeAnimationFrames}{false}
 
 \setcounter{tocdepth}{3}    % how many sectioning levels to show in ToC
 
 
-% \def\imagepageinnermargin{1cm}
-% \def\imagepageoutermargin{1cm}
+\def\imagepageinnermargin{1cm}
+\def\imagepageoutermargin{1cm}
 
 % pro tisk
-\def\imagepageinnermargin{2cm}
-\def\imagepageoutermargin{0.5cm}
+% \def\imagepageinnermargin{0.5cm}
+% \def\imagepageoutermargin{2cm}
 
 
 % \newcommand{\getmode}{dark-mode}
@@ -38,6 +38,12 @@
 %     }
 \addbibresource{Reference.bib}
 
+\let\tmp\oddsidemargin
+\let\oddsidemargin\evensidemargin
+\let\evensidemargin\tmp
+\reversemarginpar
+
+
 \begin{document}
 \pagenumbering{gobble}
 \input{Tex/TitlePage.tex}
@@ -45,6 +51,7 @@
 \input{Tex/ÚvodníVěci.tex}
 \input{Tex/ContentsPage.tex}
 \pagenumbering{arabic}
+
 \input{Tex/Úvod.tex}
 \input{Tex/Řízený a řídící systém/Popis řízeného systému.tex}
 \input{Tex/Řízený a řídící systém/Zjednodušený model systému.tex}
@@ -55,7 +62,7 @@
 \input{Tex/NURBS/NURBS křivky.tex}
 \input{Tex/NURBS/NURBS povrchy.tex}
 \input{Tex/NURBS/NURBS Interpolace křivky.tex}
-% \input{Tex/NURBS/NURBS Interpolace 4D křivky.tex}
+% % \input{Tex/NURBS/NURBS Interpolace 4D křivky.tex}
 \input{Tex/NURBS/NURBS Interpolace povrchu.tex}
 \input{Tex/NURBS/NURBS Interpolace 4D povrchu.tex}
 \input{Tex/NURBS/NURBS Aproximace křivky.tex}
@@ -69,6 +76,6 @@
 \input{Tex/Návrh systému automatické kalibrace CCT/Aktualizace CCT.tex}
 \input{Tex/Závěr.tex}
 \pagebreak
-\section*{Zdroje}
+\section*{Reference}
 \printbibliography[heading=none]
 \end{document}

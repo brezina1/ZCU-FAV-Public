@@ -4,7 +4,7 @@ Pro aproximaci ve 4D prostoru lze lehkými úpravami použít algoritmus zmíně
 sekci \nameref{section: gauss surface approximation 3D}. Stačí rozšířit
 Gaussovu funkci $f(x,y)$ na funkci $f(x,y,w)$\footnote{Jelikož chceme
     aproximovat souřadnici $z$ (stejně jako ve 3D případě), Gaussova funkce má jako
-    třetí vstupní parametr souřadnici $w$} (viz animace č.~\ref{fig:Ukázka Gaussovo
+    třetí vstupní parametr souřadnici $w$} (viz animace č.~\ref{fig:Ukázka Gaussovy
     funkce 4D}), tj.:
 \begin{align}
     f(x,y,w) = \exp\left(-\left(\frac{(x - x_0)^2}{2\sigma_x^2} + \frac{(y - y_0)^2}{2\sigma_y^2} + \frac{(w - w_0)^2}{2\sigma_w^2} \right)\right)
@@ -24,8 +24,8 @@ v sekci \nameref{section:interpolace 4D povrchu}. Na takto získané povrchy
 pro příslušné hodnoty souřadnice $w$ stačí aplikovat aproximaci ze sekce \nameref{section: gauss surface approximation 3D}.
 \par
 Ukázka aproximace s různými parametry pro aproximační body $\bf{\bar{Q}}_i$
-jsou na animacích č.~\ref{fig:4D aproximace pro různé parametry Gaussovo funkce č. 1},
-\ref{fig:4D aproximace pro různé parametry Gaussovo funkce č. 2}, kde:
+jsou na animacích č.~\ref{fig:4D aproximace pro různé parametry Gaussovy funkce č. 1},
+\ref{fig:4D aproximace pro různé parametry Gaussovy funkce č. 2}, kde:
 \begin{align}
     \bf{\bar{Q}}_1 & = [x, y, z, w] = \input{Generated/Gauss Approximace 4D approx bod 1.tex} \\
     \bf{\bar{Q}}_2 & = [x, y, z, w]= \input{Generated/Gauss Approximace 4D approx bod 2.tex}  \\
@@ -37,10 +37,10 @@ jsou na animacích č.~\ref{fig:4D aproximace pro různé parametry Gaussovo fun
         \vspace*{\fill}
         \begin{figure}[H]
             \centering
-            \includeanimation{Generated/Ukázka Gaussovo funkce 4D/frame-}{12.5}{palindrome, height=0.6\textheight}
+            \includeanimation{Generated/Ukázka Gaussovy funkce 4D/frame-}{12.5}{palindrome, height=0.6\textheight}
             % \includeanimation{Generated/4D surface demo 1/frame-}{12.5}{palindrome, height=0.5\textheight}
-            \caption{Ukázka průběhu Gaussovo funkce $f(x,y,w)$}
-            \label{fig:Ukázka Gaussovo funkce 4D}
+            \caption{Ukázka průběhu Gaussovy funkce $f(x,y,w)$}
+            \label{fig:Ukázka Gaussovy funkce 4D}
         \end{figure}
         \vspace*{\fill}
     \end{landscapeimagepage}}{}
@@ -49,9 +49,9 @@ jsou na animacích č.~\ref{fig:4D aproximace pro různé parametry Gaussovo fun
         \vspace*{\fill}
         \begin{figure}[H]
             \centering
-            \includeanimationframes[\vspace{1cm}]{Generated/Ukázka Gaussovo funkce 4D/frame-}{width=0.28\pdfpageheight}
-            \caption{Ukázka průběhu Gaussovo funkce $f(x,y,w)$}
-            \label{fig:Ukázka Gaussovo funkce 4D}
+            \includeanimationframes[\vspace{1cm}]{Generated/Ukázka Gaussovy funkce 4D/frame-}{width=0.28\pdfpageheight}
+            \caption{Ukázka průběhu Gaussovy funkce $f(x,y,w)$}
+            \label{fig:Ukázka Gaussovy funkce 4D}
         \end{figure}
         \vspace*{\fill}
     \end{landscapeimagepage}}{}
@@ -64,18 +64,18 @@ jsou na animacích č.~\ref{fig:4D aproximace pro různé parametry Gaussovo fun
             \begin{subfigure}{.5\textheight}
                 \centering
                 \includeanimation{Generated/4D surface gauss approx demo 1/frame-}{12.5}{palindrome, height=0.45\textheight}
-                \caption{4D aproximace pro různé parametry Gaussovo funkce č.~1\\(Průhlednost aproximačních bodů odpovídá jejich vzdálenosti v ose $w$)}
-                \label{fig:4D aproximace pro různé parametry Gaussovo funkce č. 1}
+                \caption{4D aproximace pro různé parametry Gaussovy funkce č.~1\\(Průhlednost aproximačních bodů odpovídá jejich vzdálenosti v ose $w$)}
+                \label{fig:4D aproximace pro různé parametry Gaussovy funkce č. 1}
             \end{subfigure}
             \hspace{2.5cm}
             \begin{subfigure}{.5\textheight}
                 \centering
                 \includeanimation{Generated/4D surface gauss approx demo 2/frame-}{12.5}{palindrome, height=0.45\textheight}
-                \caption{4D aproximace pro různé parametry Gaussovo funkce č.~2\\(Průhlednost aproximačních bodů odpovídá jejich vzdálenosti v ose $w$)}
-                \label{fig:4D aproximace pro různé parametry Gaussovo funkce č. 2}
+                \caption{4D aproximace pro různé parametry Gaussovy funkce č.~2\\(Průhlednost aproximačních bodů odpovídá jejich vzdálenosti v ose $w$)}
+                \label{fig:4D aproximace pro různé parametry Gaussovy funkce č. 2}
             \end{subfigure}
-            \caption{Ukázka aproximace 4D povrchů s užitím Gaussovo funkce}
-            \label{fig:Ukázka aproximace 4D povrchů s užitím Gaussovo funkce}
+            \caption{Ukázka aproximace 4D povrchů s užitím Gaussovy funkce}
+            \label{fig:Ukázka aproximace 4D povrchů s užitím Gaussovy funkce}
         \end{figure}
         \vspace*{\fill}
     \end{landscapeimagepage}}{}
@@ -85,8 +85,8 @@ jsou na animacích č.~\ref{fig:4D aproximace pro různé parametry Gaussovo fun
         \begin{figure}[H]
             \centering
             \includeanimationframes[\vspace{1cm}]{Generated/4D surface gauss approx demo 1/frame-}{width=0.28\pdfpageheight}
-            \caption{4D aproximace pro různé parametry Gaussovo funkce č.~1\\(Průhlednost aproximačních bodů odpovídá jejich vzdálenosti v ose $w$)}
-            \label{fig:4D aproximace pro různé parametry Gaussovo funkce č. 1}
+            \caption{4D aproximace pro různé parametry Gaussovy funkce č.~1\\(Průhlednost aproximačních bodů odpovídá jejich vzdálenosti v ose $w$)}
+            \label{fig:4D aproximace pro různé parametry Gaussovy funkce č. 1}
         \end{figure}
         \vspace*{\fill}
     \end{landscapeimagepage}
@@ -95,8 +95,8 @@ jsou na animacích č.~\ref{fig:4D aproximace pro různé parametry Gaussovo fun
         \begin{figure}[H]
             \centering
             \includeanimationframes[\vspace{1cm}]{Generated/4D surface gauss approx demo 2/frame-}{width=0.28\pdfpageheight}
-            \caption{4D aproximace pro různé parametry Gaussovo funkce č. 2\\(Průhlednost aproximačních bodů odpovídá jejich vzdálenosti v ose $w$)}
-            \label{fig:4D aproximace pro různé parametry Gaussovo funkce č. 2}
+            \caption{4D aproximace pro různé parametry Gaussovy funkce č. 2\\(Průhlednost aproximačních bodů odpovídá jejich vzdálenosti v ose $w$)}
+            \label{fig:4D aproximace pro různé parametry Gaussovy funkce č. 2}
         \end{figure}
         \vspace*{\fill}
     \end{landscapeimagepage}

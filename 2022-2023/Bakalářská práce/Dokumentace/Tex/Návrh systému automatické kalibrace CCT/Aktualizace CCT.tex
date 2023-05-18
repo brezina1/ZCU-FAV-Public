@@ -1,17 +1,17 @@
 \subsection{Aktualizace kalibrační tabulky}\label{section:aktualizace CCT}
-Na obrázcích č.~\ref{fig:Původní kalibrační tabulka s aktualizačními hodnotami}, \ref{fig:Zdrojová tabulka aktualizačních hodnot}, \ref{fig:Interpolace původní kalibrační tabulky} a \ref{fig:Výsledek aktualizace CCT s užitím Gaussovo aproximace} je ukázka výsledné aktualizace kalibrační tabulky užitím Gaussovo funkce z kapitoly \nameref{section: gauss surface approximation 3D}. Jako zdrojová data pro aktualizační body, tj. nejnovější hodnoty potřebného kompenzačního proudu, jsou použity hodnoty z tabulky \nameref{fig: NURBS interpolace zpracovaných dat pomocí NURBS aproximace pro zpětný pohyb, Ids = 1 m}, kterou jsme získali analýzou záznamů pohybu manipulátoru. Byly vybrány takové body, na kterých je výsledný efekt vidět nejlépe z důvodu prezentace výsledků.
+Na obrázcích č.~\ref{fig:Původní kalibrační tabulka s~aktualizačními hodnotami}, \ref{fig:Zdrojová tabulka aktualizačních hodnot}, \ref{fig:Interpolace původní kalibrační tabulky} a \ref{fig:Výsledek aktualizace CCT s~užitím Gaussovy aproximace} je ukázka výsledné aktualizace kalibrační tabulky užitím Gaussovy funkce z~kapitoly \nameref{section: gauss surface approximation 3D}. Jako zdrojová data pro aktualizační body, tj.~nejnovější hodnoty potřebného kompenzačního proudu, jsou použity hodnoty z~tabulky \nameref{fig: NURBS interpolace zpracovaných dat pomocí NURBS aproximace pro zpětný pohyb, Ids = 1 m}, kterou jsme získali analýzou záznamů pohybu manipulátoru. Byly vybrány takové body, na kterých je výsledný efekt vidět nejlépe z~důvodu prezentace výsledků.
 \par
-Jak lze z obrázku vidět, aktualizace tabulky poskytla uspokojivé výsledky. Nicméně Gaussova aproximace v kombinaci s naší implementací sběru dat není bezvadná. Nasbírané body neobsahují hodnoty pro extrémy poloh kloubu $C_{Arc}$\footnote{Toto je způsobeno naší filtrací konstantní rychlosti, jedná se o krajní případ, který je potřeba ještě dořešit.} (0 a 1) a to znamená, že zatím není možnost aktualizace těchto krajních hodnot. 
+Jak lze z~obrázku vidět, aktualizace tabulky poskytla uspokojivé výsledky. Nicméně Gaussova aproximace v~kombinaci s~naší implementací sběru dat není bezvadná. Nasbírané body neobsahují hodnoty pro extrémy poloh kloubu $C_{Arc}$\footnote{Toto je způsobeno naší filtrací konstantní rychlosti, jedná se o~krajní případ, který je potřeba ještě dořešit.} (0 a~1) a~to znamená, že zatím není možnost aktualizace těchto krajních hodnot. 
 \par
-Otestování aktualizace 4D proudové kalibrační tabulky užitím algoritmu z kapitoly \nameref{section: gauss surface approximation 4D} bohužel není možné z důvodu chybějícího záznamu manuálního ovládání stroje uživatelem pro více os.
+Otestování aktualizace 4D proudové kalibrační tabulky užitím algoritmu z~kapitoly \nameref{section: gauss surface approximation 4D} bohužel není možné z~důvodu chybějícího záznamu manuálního ovládání stroje uživatelem pro více os.
 \begin{landscapeimagepage}
     \begin{figure}[H]
         \centering
         \begin{subfigure}{.5\textheight}
             \centering
             \includegraphics[width=\textwidth]{Generated/CCT před aktualizací s aktualizačními hodnotami.pdf}
-            \caption{Interpolace původní kalibrační tabulky s aktualizačními hodnotami}
-            \label{fig:Původní kalibrační tabulka s aktualizačními hodnotami}
+            \caption{Interpolace původní kalibrační tabulky s~aktualizačními hodnotami}
+            \label{fig:Původní kalibrační tabulka s~aktualizačními hodnotami}
         \end{subfigure}
         \vspace{0.5cm}
         \hspace{2.5cm}
@@ -32,10 +32,10 @@ Otestování aktualizace 4D proudové kalibrační tabulky užitím algoritmu z 
         \begin{subfigure}{.5\textheight}
             \centering
             \includegraphics[width=\textwidth]{Generated/Výsledek aktualizace CCT.pdf}
-            \caption{Výsledek aktualizace CCT s užitím Gaussovo aproximace}
-            \label{fig:Výsledek aktualizace CCT s užitím Gaussovo aproximace}
+            \caption{Výsledek aktualizace CCT s~užitím Gaussovy aproximace}
+            \label{fig:Výsledek aktualizace CCT s~užitím Gaussovy aproximace}
         \end{subfigure}
-        \caption{Ukázka aktualizace CCT pro zpětný pohyb, $Ids = 1$ na základě měření získaného z analýzy testu odchylky proudu}
-        \label{fig:Ukázka aktualizace CCT na základě měření získaného z analýzy testu odchylky proudu}
+        \caption{Ukázka aktualizace CCT pro zpětný pohyb, $Ids = 1$ na základě měření získaného z~analýzy testu odchylky proudu}
+        \label{fig:Ukázka aktualizace CCT na základě měření získaného z~analýzy testu odchylky proudu}
     \end{figure}
 \end{landscapeimagepage}

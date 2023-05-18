@@ -2,6 +2,10 @@
 \BeforeBeginEnvironment{imagepage}{
   \newpage
   \newgeometry{top=0cm, bottom=0cm}
+  \let\tmp\oddsidemargin
+\let\oddsidemargin\evensidemargin
+\let\evensidemargin\tmp
+\reversemarginpar
   \begin{samepage}
     \vspace*{\fill}
     }

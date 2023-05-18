@@ -1,18 +1,18 @@
-\section{Řízený a řídící systém}\label{section: řízený a říddící systém}
-Tato kapitola je zaměřena na popis řízeného systému a jeho zjednodušeného modelu. Dále je popsána struktura řídícího systému včetně regulační smyčky a následně je uveden návrh řešení autonomní rekalibrace proudové tabulky.
+\section{Řízený a~řídící systém}\label{section: řízený a~říddící systém}
+Tato kapitola je zaměřena na popis řízeného systému a~jeho zjednodušeného modelu. Dále je popsána struktura řídícího systému včetně regulační smyčky a~následně je uveden návrh řešení autonomní rekalibrace proudové tabulky.
 \subsection{Popis řízeného systému}
-Jedná se o sériový robotický manipulátor s 8 stupni volnosti --- model Phillips Azurion 7 C20. Manipulátor je špičkový lékařský zobrazovací systém určený pro použití v zákrokové kardiologii a radiologii\footcite{AzurionPage}. Stroj lze vidět na obrázku č.~\ref{fig:Výpočetní tomograf}.\par
-Pro účely této práce jsou klíčové klouby č.~4, 5 a 7, které mají i své vlastní pojmenování os s příslušným rozsahem pohybu\footnote{Přesné hodnoty byly znormovány z důvodu důvěryhodnosti dat}:
+Jedná se o~sériový robotický manipulátor s~8 stupni volnosti --- model Phillips Azurion 7 C20. Manipulátor je špičkový lékařský zobrazovací systém určený pro použití v~zákrokové kardiologii a~radiologii\footcite{AzurionPage}. Stroj lze vidět na obrázku č.~\ref{fig:Výpočetní tomograf}.\par
+Pro účely této práce jsou klíčové klouby č.~4, 5 a~7, které mají i~své vlastní pojmenování os s~příslušným rozsahem pohybu\footnote{Jak již bylo zmíněno v úvodu, přesné hodnoty byly znormovány z~důvodu důvěryhodnosti dat}:
 \begin{itemize}
     \item Kloub č. 5 --- $C_{Arc}\in[0, 1]$
     \item Kloub č. 4 --- $Prop\in[0, 1]$
     \item Kloub č. 7 --- $Ids\in[0, 1]$
 \end{itemize}
-Pro jednotlivé klouby byl navržen regulátor pohybu na základě fyzikálních parametrů stroje. Tyto parametry se mohou časem měnit, až se nakonec začnou projevovat na průběhu regulace. Toto může být například způsobeno nerovnoměrným opotřebením klíčových dílů zodpovědných za přesný pohyb robota a nebo pouhým postupným třením kabelů. Nejen tímto způsobené nepřesnosti lze kompenzovat přímovazební složkou doplněnou o proudovou kalibrační tabulku.
+Pro jednotlivé klouby byla navržena regulační smyčka pohybu na základě fyzikálních parametrů stroje. Tyto parametry se mohou časem měnit, až se nakonec začnou projevovat na průběhu regulace. Toto může být například způsobeno nerovnoměrným opotřebením klíčových dílů zodpovědných za přesný pohyb robota a~nebo například pouhým třením kabelů. Nejen tímto způsobené nepřesnosti lze kompenzovat přímovazební složkou doplněnou o~proudovou kalibrační tabulku.
 
-% Působením času se díly zodpovědné za přesný pohyb robota v různých místech
-% nerovnoměrně opotřebovávají a to způsobuje nelineární změny fyzikálních
+% Působením času se díly zodpovědné za přesný pohyb robota v~různých místech
+% nerovnoměrně opotřebovávají a~to způsobuje nelineární změny fyzikálních
 % parametrů, pro které byl daný regulátor pohybu navržen. Tyto nepřesnosti lze
-% kompenzovat přímovazební složkou doplněnou o proudovou kalibrační tabulku.\par
+% kompenzovat přímovazební složkou doplněnou o~proudovou kalibrační tabulku.\par
 
-% Pro náš problém budeme uvažovat klouby č. 4, 5 a 7 stroje z obrázku č. \ref{fig:Výpočetní tomograf}. Klouby mají vlastní pojmenování os a omezený rozsah pohybu:
+% Pro náš problém budeme uvažovat klouby č. 4, 5 a~7 stroje z~obrázku č. \ref{fig:Výpočetní tomograf}. Klouby mají vlastní pojmenování os a~omezený rozsah pohybu:

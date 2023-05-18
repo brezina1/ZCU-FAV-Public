@@ -6,7 +6,7 @@ chceme interpolovat NURBS povrchem stupně $p$ a $q$, tzn.:
     \bm{Q}_{k,l} = \bm{S}(\bar{u}_k, \bar{v}_l) = \sum_{i=0}^{n}\sum_{j=0}^{m}
     N_{i,p}(\bar{u}_k)N_{j,q}(\bar{v}_l)\bm{P}_{i,j}
 \end{equation}
-Stejně jako u interpolace křivky musíme vhodně zvolit parametry $\bar{u}_k$ a $\bar{v}_k$
+Stejně jako u~interpolace křivky musíme vhodně zvolit parametry $\bar{u}_k$ a $\bar{v}_k$
 a uzlové vektory $\bm{U}$ a $\bm{V}$.
 Užitím běžných metod~(\ref{eq:chord length}) a ($\ref{eq:centripetal method}$) získáme
 vektory $\hat{\bar{u}}_k$ a $\hat{\bar{v}}_k$, které musíme poté
@@ -15,11 +15,11 @@ zprůměrovat přes všechny hodnoty, tzn:
     \bar{u}_k & = \frac{1}{m + 1}\sum_{j=0}^{m}\hat{\bar{u}}_j \quad\quad & k =0,\ldots,n \\
     \bar{v}_l & = \frac{1}{n + 1}\sum_{j=0}^{n}\hat{\bar{v}}_j\quad\quad  & l =0,\ldots,m
 \end{alignat}
-Uzlové vektory $\bm{U}$ a $\bm{V}$ spočteme již stejně jako u interpolace křivky,
+Uzlové vektory $\bm{U}$ a $\bm{V}$ spočteme již stejně jako u~interpolace křivky,
 viz~\ref{eq:uzlový vektor průměrováním}.\par
-Oproti křivce, v tomto případě $\bm{P}_{i,j}$ již není matice, ale tenzor. Tento problém můžeme
-zjednodušit na interpolaci křivek postupně v obou směrech
-zafixováním jedné z proměnných $k$ nebo $l$, tj.:
+Oproti křivce, v~tomto případě $\bm{P}_{i,j}$ již není matice, ale tenzor. Tento problém můžeme
+zjednodušit na interpolaci křivek postupně v~obou směrech
+zafixováním jedné z~proměnných $k$ nebo $l$, tj.:
 \begin{equation}
     \bm{Q}_{k,l} =\sum_{i=0}^{n}N_{i,p}(\bar{u}_k)
     \left(\sum_{j=0}^{m}N_{j,q}(\bar{v}_l)\bm{P}_{i,j}\right)

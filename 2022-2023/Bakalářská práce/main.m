@@ -66,9 +66,9 @@ surfaceInterpolationDemo4D(animate);
 surfaceApproximationDemo();
 
 surfaceApproximationGaussDemo();
-surfaceApproximationGaussDemo4D(animate);
+surfaceApproximationGaussDemo4D(true);
 
-gaussianFunctionsDemo(animate);
+gaussianFunctionsDemo(true);
 motionTraceDemo();
 currentCalibrationDemo();
 exportAllNamedFigures("./Dokumentace/Generated/")

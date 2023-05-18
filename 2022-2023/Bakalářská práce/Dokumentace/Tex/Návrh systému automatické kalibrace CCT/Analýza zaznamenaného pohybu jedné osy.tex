@@ -1,24 +1,24 @@
 \subsection{Analýza měřených dat}
-Tato kapitola je zaměřena na sběr vhodných dat pro aktualizace kalibračních tabulek. Společnost Phillips poskytla za účelem výzkumu a vývoje autonomního kalibračního systému tyto záznamy:
+Tato kapitola je zaměřena na sběr vhodných dat pro aktualizace kalibračních tabulek. Společnost Phillips poskytla za účelem výzkumu a~vývoje autonomního kalibračního systému tyto záznamy:
 \begin{enumerate}
     \item\label{item:analýza soubor jedna osa} Záznam jedné osy manuálního ovládání stroje uživatelem
     \item\label{item:analýza soubor test proudu} Záznam testů proudové odchylky na předdefinovaných trajektoriích
     % \item \todo{Záznam více os manuálního ovládání stroje uživatelem}
 \end{enumerate}
 \subsubsection{Analýza zaznamenaného pohybu jednoho kloubu}\label{section:Analýza záznamu jednoho kloubu}
-Cílem této procedury je hledat vhodné body pro aktualizaci kalibračních tabulek. Především hledáme trajektorie s pomalým pohybem a konstantní rychlostí, protože v této oblasti se nejvíce projevují statické a kvazistatické síly, které by kalibrační tabulka měla kompenzovat, a proto jsou pro nás relevantní.\par
+Cílem této procedury je hledat vhodné body pro aktualizaci kalibračních tabulek. Především hledáme trajektorie s~pomalým pohybem a~konstantní rychlostí, protože v~této oblasti se nejvíce projevují statické a~kvazistatické síly, které by kalibrační tabulka měla kompenzovat, a~proto jsou pro nás relevantní.\par
 V této části budeme uvažovat záznam číslo \ref{item:analýza soubor jedna osa}.
-Prozkoumáním záznamu lze zjistit, zda-li se daný kloub někdy pohybuje vhodnou rychlostí pro naše účely, tj.: neminimální\footnote{Při hodně malých rychlostech nejvíce působí tření, které by se značně podepsalo na měřeném proudu.}, shora omezenou\footnote{Kalibrační tabulka má největší vliv při pomalých pohybech, proto by i bylo vhodné tabulku upravovat na základě měření při takovýchto podobných rychlostech.} a konstantní.\par
+Prozkoumáním záznamu lze zjistit, zda-li se daný kloub někdy pohybuje vhodnou rychlostí pro naše účely, tj.:~neminimální\footnote{Při hodně malých rychlostech nejvíce působí tření, které by se značně podepsalo na měřeném proudu.}, shora omezenou\footnote{Kalibrační tabulka má největší vliv při pomalých pohybech, proto by i~bylo vhodné tabulku upravovat na základě měření při takovýchto podobných rychlostech.} a~konstantní.\par
 Body, které splňují tyto požadavky můžeme algoritmicky odhalit následovně:
 \begin{enumerate}
-    \item Konstantní rychlost --- výpočtem diferencí naměřených hodnot jsme schopni sledovat absolutní změny v rychlosti v každém časovém okamžiku. Zvolením vhodného prahu\footnote{\label{footnote:volba prahu}Pro účely této práce byly zvoleny hodnoty ručně na základě naměřených hodnot}, lze takto určit kdy je rychlost téměř konstantní.
-    \item Neminimální, shora omezená rychlost --- nalezneme hodnoty rychlosti, které jsou shora i zespoda omezeny vhodně zvolenými prahy\footnoteref{footnote:volba prahu}.
+    \item Konstantní rychlost --- výpočtem diferencí naměřených hodnot jsme schopni sledovat změny v~rychlosti v~každém časovém okamžiku. Zvolením vhodného prahu\footnote{\label{footnote:volba prahu}Pro účely této práce byly zvoleny hodnoty ručně na základě naměřených hodnot}, lze takto určit kdy je rychlost téměř konstantní.
+    \item Neminimální, shora omezená rychlost --- nalezneme hodnoty rychlosti, které jsou shora i~zespoda omezeny vhodně zvolenými prahy\footnoteref{footnote:volba prahu}.
 \end{enumerate}
-Užitím pouze filtru konstantní rychlosti dostáváme body, kdy rychlost daného kloubu je skutečně téměř konstantní --- viz obrázek č.~\ref{fig:Ukázka aplikace filtru konstantní rychlosti}. Nicméně zdaleka ne všechny tyto hodnoty jsou vhodné pro aktualizaci CCT, protože vybrané hodnoty obsahují značné výkyvy v proudovém měření.
+Užitím pouze filtru konstantní rychlosti dostáváme body, kdy rychlost daného kloubu je skutečně téměř konstantní --- viz obrázek č.~\ref{fig:Ukázka aplikace filtru konstantní rychlosti}. Nicméně zdaleka ne všechny tyto hodnoty jsou vhodné pro aktualizaci CCT, protože vybrané hodnoty obsahují značné výkyvy v~proudovém měření.
 \par
-Aplikací všech filtrů získáme body, které by se již daly využít pro úpravu CCT --- viz obrázek č.~\ref{fig:Ukázka aplikace všech filrů}. Je nutné dodat, že v tomto měření máme dostupné pouze 2 (poloha $C_{Arc}$, kompenzační proud) ze 4 (poloha $C_{Arc}$, $Prop$, $Ids$ a kompenzační proud) hodnot, které jsou potřeba pro získání přesné polohy v kompenzační tabulce, a tudíž na základě tohoto měření nejsme schopni přesně vyzkoušet aktualizaci CCT --- potřebná data, na základě kterých by se aktualizace dala otestovat přímo, Phillips neposkytl.
+Aplikací všech filtrů získáme body, které by se již daly využít pro úpravu CCT --- viz obrázek č.~\ref{fig:Ukázka aplikace všech filrů}. Je nutné dodat, že v~tomto měření máme dostupné pouze 2 (poloha $C_{Arc}$, kompenzační proud) ze 4 (poloha $C_{Arc}$, $Prop$, $Ids$ a~kompenzační proud) hodnot, které jsou potřeba pro získání přesné polohy v~kompenzační tabulce, a~tudíž na základě tohoto měření nejsme schopni přesně vyzkoušet aktualizaci CCT --- potřebná data, na základě kterých by se aktualizace dala otestovat přímo, Phillips neposkytl.
 \par
-Přestože nevíme 2 souřadnice, můžeme zkusit získané hodnoty dosadit do CCT. Konkrétně zkusíme dosadit nejdelší úsek vhodného pohybu nacházející se přibližně v polovině času záznamu. Z polohy lze vidět, že se jedná o zpětný pohyb, tím pádem vložíme hodnoty do našich dvou kalibračních tabulek pro zpětný pohyb. Z obrázků č.~\ref{fig:Vložení hodnot do tabulky pro zpětný pohyb pro polohu kloubu Ids = 0 m} a \ref{fig:Vložení hodnot do tabulky pro zpětný pohyb pro polohu kloubu Ids = 1 m} lze odhadnout, že poloha kloubu $Prop$ byla okolo hodnoty $0.85$ a poloha kloubu $Ids$ byla přibližně $0$. Pro tyto polohy je na obrázku č.~\ref{fig: Ukázka aktualizace CCT pomocí hodnot z měření jednoho kloubu pomocí Gaussovo aproximace} je již ukázka aktualizace CCT pomocí aproximace povrchu užitím Gaussovy funkce.
+Přestože nevíme 2 souřadnice, můžeme zkusit získané hodnoty dosadit do CCT. Konkrétně zkusíme dosadit nejdelší úsek vhodného pohybu nacházející se přibližně v~polovině času záznamu. Z~polohy lze vidět, že se jedná o~zpětný pohyb, tím pádem vložíme hodnoty do našich dvou kalibračních tabulek pro zpětný pohyb. Z~obrázků č.~\ref{fig:Vložení hodnot do tabulky pro zpětný pohyb pro polohu kloubu Ids = 0 m} a \ref{fig:Vložení hodnot do tabulky pro zpětný pohyb pro polohu kloubu Ids = 1 m} lze odhadnout, že poloha kloubu $Prop$ by mohla být okolo hodnoty $0.85$ a~poloha kloubu $Ids$ přibližně $0$. Pro tyto polohy je na obrázku č.~\ref{fig: Ukázka aktualizace CCT pomocí hodnot z~měření jednoho kloubu pomocí Gaussovy aproximace} je již ukázka aktualizace CCT pomocí aproximace povrchu užitím Gaussovy funkce.
 
 \begin{landscapeimagepage}
     \vspace*{\fill}
@@ -76,8 +76,8 @@ Přestože nevíme 2 souřadnice, můžeme zkusit získané hodnoty dosadit do C
             \caption{Gaussova aproximace povrchu}
             \label{}
         \end{subfigure}
-        \caption{Ukázka Gaussovo aproximace povrchu pro hodnoty z měření jednoho kloubu}
-        \label{fig: Ukázka aktualizace CCT pomocí hodnot z měření jednoho kloubu pomocí Gaussovo aproximace}
+        \caption{Ukázka Gaussovy aproximace povrchu pro hodnoty z~měření jednoho kloubu}
+        \label{fig: Ukázka aktualizace CCT pomocí hodnot z~měření jednoho kloubu pomocí Gaussovy aproximace}
     \end{figure}
 \end{landscapeimagepage}
 

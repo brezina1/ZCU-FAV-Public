@@ -8,13 +8,13 @@ sigma_x = 3.5;
 sigma_y = 3.5;
 Z = gaussianFunction2D(X, Y, x_0, y_0, sigma_x, sigma_y);
 
-figure("Name", "Ukázka Gaussovo funkce 3D", "Tag", "HighResolutionImage");
+figure("Name", "Ukázka Gaussovy funkce 3D", "Tag", "HighResolutionImage");
 surf(X,Y,Z);
 colorbar();
 xlabel("$x$");
 ylabel("$y$");
 zlabel("$z$");
-title(latexify(["Ukázka Gaussovo funkce $f(x,y)$", sprintf("$x_0 =%s, y_0 = %s, \\sigma_x = %s, \\sigma_y = %s$", ...
+title(latexify(["Ukázka Gaussovy funkce $f(x,y)$", sprintf("$x_0 =%s, y_0 = %s, \\sigma_x = %s, \\sigma_y = %s$", ...
                                         num2str(x_0), ...
                                         num2str(y_0), ...
                                         num2str(sigma_x), ...
@@ -22,8 +22,8 @@ title(latexify(["Ukázka Gaussovo funkce $f(x,y)$", sprintf("$x_0 =%s, y_0 = %s,
 % return;
 w_0 = 0;
 sigma_w = 4;
-figure("Name", "Ukázka Gaussovo funkce 4D");
-filename = sprintf("./Dokumentace/Generated/Ukázka Gaussovo funkce 4D.gif");
+figure("Name", "Ukázka Gaussovy funkce 4D");
+filename = sprintf("./Dokumentace/Generated/Ukázka Gaussovy funkce 4D.gif");
 targetDir = replace(filename, ".gif", "/");
 if (animate)
     delete(filename);
@@ -36,7 +36,7 @@ for w = 10 : -0.5 : -10
     surf(X,Y,Z);
     zlim([0, 1]);
     colorbar();
-    title(latexify(["Ukázka Gaussovo funkce $f(x,y,w)$", sprintf("$x_0 =%s, y_0 = %s, w_0 = %s$", ...
+    title(latexify(["Ukázka Gaussovy funkce $f(x,y,w)$", sprintf("$x_0 =%s, y_0 = %s, w_0 = %s$", ...
                                             num2str(x_0), ...
                                             num2str(y_0), ...
                                             num2str(w_0)), ...
