@@ -11,6 +11,7 @@ mkdir("Dokumentace/Generated")
 set(groot,'defaulttextinterpreter','latex');  
 % set(groot, 'defaultAxesTickLabelInterpreter','latex');  
 set(groot, 'defaultLegendInterpreter','latex');
+animate = false;
 
 syms l varphi(t) m g T b k
 
@@ -54,7 +55,6 @@ if exist("Materiály\", "dir")
     save("RealData", "Q_k");
 end
 
-animate = false;
 
 curveInterpolationDemo();
 %curveInterpolationDemo4D(animate);
@@ -66,9 +66,9 @@ surfaceInterpolationDemo4D(animate);
 surfaceApproximationDemo();
 
 surfaceApproximationGaussDemo();
-surfaceApproximationGaussDemo4D(true);
+surfaceApproximationGaussDemo4D(animate);
 
-gaussianFunctionsDemo(true);
+gaussianFunctionsDemo(animate);
 motionTraceDemo();
 currentCalibrationDemo();
 exportAllNamedFigures("./Dokumentace/Generated/")
